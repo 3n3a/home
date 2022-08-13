@@ -59,10 +59,13 @@ const { title } = Astro.props as Props;
 		font-size: var(--font-size-xl);
 		font-family: var(--font-silkscreen);
 	}
-
+	
 	:global(h2) {
-		margin-top: 1.5em;
 		font-size: var(--font-size-lg);
+	}
+
+	:global(h3) {
+		font-size: var(--font-size-base);
 	}
 
 	:global(code) {

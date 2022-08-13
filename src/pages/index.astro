@@ -1,9 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { Project } from '../model/Project';
+
+const projectList: Project[] = [
+	{title: "My Blog", href: "https://blog.3n3a.ch", body: "Personal blogging site, about tech, studying and more"}
+]
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="3n3a - home">
 	<main class="container">
 		<h1>3n3a</h1>
 		<Card
@@ -14,23 +19,9 @@ import Card from '../components/Card.astro';
 			/>
 		<h2 class="font-silkscreen">Projects</h2>
 		<div class="grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-				color="blueYellow"
-			/>
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-				color="lightBluePurple"
-			/>
+			{projectList.map(function(data) {
+				return <Card title={data.title} href={data.href} body={data.body} color={data.color} customBg={data.customBg} />
+			})}
 		</div>
 		
 	</main>
@@ -43,6 +34,11 @@ import Card from '../components/Card.astro';
 		padding: 1em;
 		max-width: 60ch;
 	}
+
+	h2 {
+		margin-top: 1.5em;
+	}
+
 
 	.grid {
 		display: grid;
