@@ -1,14 +1,23 @@
 ---
+import { Color } from "../enum/Color";
+
 export interface Props {
 	title: string;
-	body: string;
+	body?: string;
 	href: string;
+	color?: string;
+	customBg?: string;
 }
 
-const { href, title, body } = Astro.props as Props;
+const { href, title, body, color, customBg } = Astro.props as Props;
+
+const gradientColor = Color[color] || color || Color.purpleBlue;
+const displayBody = body ? "block" : "none";
+const cardBg = customBg ? customBg : "var(--card-bg)";
 ---
 
-<li class="link-card">
+
+<div class="link-card">
 	<a href={href}>
 		<h2>
 			{title}
@@ -18,17 +27,13 @@ const { href, title, body } = Astro.props as Props;
 			{body}
 		</p>
 	</a>
-</li>
-<style>
-	:root {
-		--link-gradient: linear-gradient(45deg, #4f39fa, #da62c4 30%, var(--color-border) 60%);
-	}
+</div>
+<style define:vars={{ gradientColor, displayBody, cardBg }}>
 
 	.link-card {
-		list-style: none;
 		display: flex;
 		padding: 0.15rem;
-		background-image: var(--link-gradient);
+		background-image: var(--gradientColor);
 		background-size: 400%;
 		border-radius: 0.5rem;
 		background-position: 100%;
@@ -42,7 +47,7 @@ const { href, title, body } = Astro.props as Props;
 		padding: 1em 1.3em;
 		border-radius: 0.35rem;
 		color: var(--text-color);
-		background-color: white;
+		background-color: var(--cardBg);
 		opacity: 0.8;
 	}
 
@@ -52,6 +57,7 @@ const { href, title, body } = Astro.props as Props;
 	}
 
 	p {
+		display: var(--displayBody);
 		margin-top: 0.75rem;
 		margin-bottom: 0;
 	}

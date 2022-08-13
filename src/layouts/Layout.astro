@@ -8,26 +8,35 @@ const { title } = Astro.props as Props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	<meta name="generator" content={Astro.generator} />
+	<title>{title}</title>
+</head>
+
+<body>
+	<slot />
+</body>
+
 </html>
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
 	:root {
+		--font-silkscreen: 'Silkscreen', cursive;
+
 		--font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
 		--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
 		--font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
 
 		--color-text: hsl(12, 5%, 4%);
-		--color-bg: hsl(10, 21%, 95%);
-		--color-border: hsl(17, 24%, 90%);
+		--color-bg: rgb(253, 236, 255);
+		
+		--card-border: rgb(253, 117, 246);
+		--card-bg: rgb(255, 233, 255);
 	}
 
 	html {
@@ -41,11 +50,18 @@ const { title } = Astro.props as Props;
 		margin: 0;
 	}
 
+
+	:global(.font-silkscreen) {
+		font-family: var(--font-silkscreen);
+	}
+
 	:global(h1) {
 		font-size: var(--font-size-xl);
+		font-family: var(--font-silkscreen);
 	}
 
 	:global(h2) {
+		margin-top: 1.5em;
 		font-size: var(--font-size-lg);
 	}
 
