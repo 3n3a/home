@@ -7,7 +7,7 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.pageTitle}>
 	<main class="container">
-        <BackButton title="Back" href="./" />
+        <BackButton title="Back" href="/" />
 		<h2>{frontmatter.title}</h2>
 		
 		<slot/>
