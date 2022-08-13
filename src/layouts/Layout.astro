@@ -23,7 +23,13 @@ const { title } = Astro.props as Props;
 
 </html>
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+	@font-face {
+		font-family: 'Silkscreen';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url(/fonts/silkscreen.ttf) format('truetype');
+	}
 
 	:root {
 		--font-silkscreen: 'Silkscreen', cursive;
