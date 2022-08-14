@@ -2,9 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import { Project } from '../model/Project';
-const { API_URL } = import.meta.env
+const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
 
-const response = await fetch(`${API_URL}/api/projects`)
+const response = await fetch(`${API_URL}/api/projects`, {
+	redirect: 'follow',
+	headers: {
+		'CF-Access-Client-Id': API_CLIENT_KEY,
+		'CF-Access-Client-Secret': API_CLIENT_TOKEN,
+	}
+})
 const data = await response.json()
 const projectList: Project[] = data.data
 ---
