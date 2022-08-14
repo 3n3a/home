@@ -2,15 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import { Project } from '../model/Project';
+const { API_URL } = import.meta.env
 
-const projectList: Project[] = [
-	{title: "My Blog", href: "https://blog.3n3a.ch", body: "Personal blogging site, about tech, studying and more"},
-	{title: "Paywall Bypasser", href: "https://news.enea.tech", body: "Read your news for free, focus on swiss newspapers."},
-	{title: "Lilly's Website", href: "https://l1lly.li", body: "The personal website of my favourite human"},
-	{title: "Apple Calculator", href: "https://apple-calc.enea.tech", body: "A calculator styled like the one in MacOS"},
-	{title: "Art", href: "https://art.3n3a.ch", body: "Just some art I and others have created on the internet."},
-	{title: "pink", href: "https://pink.enea.tech/", body: "a pink website, where you can get a pink image"}
-]
+const response = await fetch(`${API_URL}/api/projects`)
+const data = await response.json()
+const projectList: Project[] = data.data
 ---
 
 <Layout title="3n3a - home">
