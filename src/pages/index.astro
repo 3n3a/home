@@ -4,7 +4,7 @@ import Card from '../components/Card.astro';
 import { Project } from '../model/Project';
 const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
 
-const response = await fetch(`${API_URL}/api/projects`, {
+const response = await fetch(`${API_URL}/homepage/projects`, {
 	redirect: 'follow',
 	headers: {
 		'CF-Access-Client-Id': API_CLIENT_KEY,
