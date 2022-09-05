@@ -42,7 +42,9 @@ const { title } = Astro.props as Props;
 		font-style: normal;
 		font-weight: 400;
 		font-display: swap;
-		src: url(/fonts/silkscreen.ttf) format('truetype');
+		src: url('/fonts/silkscreen.woff2') format('woff2'), /* Super Modern Browsers */
+			url('/fonts/silkscreen.woff') format('woff'), /* Pretty Modern Browsers */
+			url('/fonts/silkscreen.ttf')  format('truetype');
 	}
 
 	:root {
