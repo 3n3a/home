@@ -15,7 +15,6 @@ const { title } = Astro.props as Props;
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width" />
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-	<meta name="generator" content={Astro.generator} />
 	<TouchIcons />
 	<SEO
       title={title}
@@ -29,6 +28,7 @@ const { title } = Astro.props as Props;
         }
       }}
       />
+	<link rel="stylesheet" href="/css/weather-icons.min.css" />
 </head>
 
 <body>
@@ -42,9 +42,9 @@ const { title } = Astro.props as Props;
 		font-style: normal;
 		font-weight: 400;
 		font-display: swap;
-		src: url('/fonts/silkscreen.woff2') format('woff2'), /* Super Modern Browsers */
-			url('/fonts/silkscreen.woff') format('woff'), /* Pretty Modern Browsers */
-			url('/fonts/silkscreen.ttf')  format('truetype');
+		src: url('/font/silkscreen.woff2') format('woff2'), /* Super Modern Browsers */
+			url('/font/silkscreen.woff') format('woff'), /* Pretty Modern Browsers */
+			url('/font/silkscreen.ttf')  format('truetype');
 	}
 
 	:root {
