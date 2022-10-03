@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import { Project } from '../model/Project';
+import WeatherDisplay from '../components/WeatherDisplay.astro';
 const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
 
 const response = await fetch(`${API_URL}/homepage/projects`, {
@@ -17,7 +18,10 @@ const projectList: Project[] = data.data
 
 <Layout title="3n3a - home">
 	<main class="container">
-		<h1>3n3a</h1>
+		<div class="spread">
+			<h1>3n3a</h1>
+			<WeatherDisplay />
+		</div>
 		<Card
 				href="/about"
 				title="About Me"
@@ -52,4 +56,11 @@ const projectList: Project[] = data.data
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		grid-gap: 1rem;
 		}
+
+	.spread {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
 </style>

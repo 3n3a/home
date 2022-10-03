@@ -1,0 +1,47 @@
+---
+
+---
+
+
+<div class="weather-display">
+    <div class="weather-part-1" id="weather-1"></div>
+    <div class="weather-part-2" id="weather-2"></div>
+</div>
+
+<script>
+    let weather1 = document.getElementById("weather-1")
+    let weather2 = document.getElementById("weather-2")
+
+    const res = await fetch('/api/weather');
+    const json = await res.json();
+    
+    weather1.innerHTML = `
+        <img src="http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" alt="${json.weather[0].main}" />
+    `
+    
+    weather2.innerHTML = `
+        <h2 style="margin: 0;">${json.main.temp} °C</h2>
+        <p style="margin: 0;">${json.name}, ${json.sys.country}</p>
+    `
+</script>
+
+<style>
+    .weather-display {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .weather-part-1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .weather-part-2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
