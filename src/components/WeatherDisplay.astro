@@ -14,9 +14,9 @@
 
     const res = await fetch('/api/weather');
     const json = await res.json();
-    
+
     weather1.innerHTML = `
-        <img src="http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" alt="${json.weather[0].main}" />
+        <img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" alt="${json.weather[0].main}" />
     `
     
     weather2.innerHTML = `
