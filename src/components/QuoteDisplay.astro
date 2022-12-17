@@ -1,0 +1,37 @@
+---
+
+---
+
+<div class="quote-display">
+    <h3 id="quote"></h3>
+    <p id="author"></p>
+</div>
+
+<script>
+    const quote = document.getElementById("quote")
+    const author = document.getElementById("author")
+
+    const res = await fetch("/api/quote")
+    const randomQuote = await res.json()
+
+    quote.innerText = randomQuote.en
+    author.innerText = randomQuote.author
+</script>
+
+<style>
+    .quote-display {
+        display: flex;
+        gap: .5em;
+        padding: 1em;
+        border: darkorchid 1.5px solid;
+        border-radius: 5px;
+    }
+
+    .quote-display h3 {
+        font-weight: 300;
+    }
+
+    .quote-display p {
+        color: darkslategrey;
+    }
+</style>

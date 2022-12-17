@@ -18,7 +18,7 @@ Frameworks, such as Vue, React, Angular,
  Springboot, Express.js, Rocket, Django,
  Flask, Svelte and Phoenix.
 
-> All of those interesting things can be found on my GitHub.
+**All of those interesting things can be found on my GitHub.**
 
 ## Social Media
 

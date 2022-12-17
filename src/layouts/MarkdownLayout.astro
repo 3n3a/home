@@ -1,5 +1,6 @@
 ---
 import BackButton from '../components/BackButton.astro';
+import QuoteDisplay from '../components/QuoteDisplay.astro';
 import Layout from '../layouts/Layout.astro';
 
 const { frontmatter } = Astro.props;
@@ -12,6 +13,7 @@ const { frontmatter } = Astro.props;
 		
 		<slot/>
 		
+		<QuoteDisplay />
 	</main>
 </Layout>
 
