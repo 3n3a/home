@@ -1,2 +1,4 @@
-# Contact
-Contact: security@3n3a.ch
+Contact: mailto:security@3n3a.ch
+Expires: 2026-01-23T16:11:00.000Z
+Preferred-Languages: en, de, fr
+Canonical: https://3n3a.ch/.well-known/security.txt
