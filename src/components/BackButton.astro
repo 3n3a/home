@@ -10,10 +10,14 @@ const { href, title } = Astro.props as Props;
 
 <div class="link-card">
 	<a href={href}>
-		<h3>
-			<span>&larr;</span>
-			{title}
-		</h3>
+		<div class="icon">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+			</svg>		  
+			<h3>
+				{title}
+			</h3>
+		</div>
 	</a>
 </div>
 <style>
@@ -32,7 +36,6 @@ const { href, title } = Astro.props as Props;
 		width: 100%;
 		text-decoration: none;
 		line-height: 1.4;
-		padding: 1em 1.3em;
 		border-radius: 0.35rem;
 		color: var(--text-color);
 		background-color: var(--card-bg);
@@ -60,5 +63,30 @@ const { href, title } = Astro.props as Props;
 	.link-card:is(:hover, :focus-within) h2 span {
 		will-change: transform;
 		transform: translateX(2px);
+	}
+
+	.icon {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.icon > svg {
+		padding-left: .5em;
+		padding-top: .5em;
+		padding-bottom: .5em;
+	}
+
+	.icon > h3 {
+		padding-right: 1em;
+		padding-left: .25em;
+	}
+
+	.w-6 {
+		width: 1.75em;
+	}
+
+	.h-6 {
+		heigh: 1.75em;
 	}
 </style>

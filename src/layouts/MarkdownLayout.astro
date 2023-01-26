@@ -7,7 +7,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.pageTitle}>
-	<main class="container">
+	<main class="container more-space-above">
         <BackButton title="Back" href="/" />
 		<h2>{frontmatter.title}</h2>
 		
@@ -25,5 +25,9 @@ const { frontmatter } = Astro.props;
 		margin: auto;
 		padding: 1em;
 		max-width: 60ch;
+	}
+
+	.more-space-above {
+		padding-top: 4em;
 	}
 </style>
