@@ -2,5 +2,22 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
+  ],
+  "automerge": true,
+  "automergeType": "pr",
+  "automergeWithLabels": [
+    "automerge"
+  ],
+  "labels": [
+    "automerge"
+  ],
+  "prBody": "Automatically merged {{depType}} dependency updates.",
+  "filters": [
+    {
+      "type": "semver",
+      "updateTypes": [
+        "patch"
+      ]
+    }
   ]
 }

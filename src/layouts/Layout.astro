@@ -6,6 +6,8 @@ export interface Props {
 }
 
 const { title } = Astro.props as Props;
+
+const currentYear = (new Date()).getFullYear()
 ---
 
 <!DOCTYPE html>
@@ -43,6 +45,10 @@ const { title } = Astro.props as Props;
 
 <body>
 	<slot />
+
+	<footer class="container more-space-above">
+		<p>&copy; {currentYear} 3n3a. All rights reserved. <a href="/impressum">Impressum</a></p>
+	</footer>	  
 </body>
 
 </html>
@@ -114,6 +120,15 @@ const { title } = Astro.props as Props;
         padding-bottom: 6rem;
 	}
 
+	:global(main,footer) {
+		margin: auto;
+		padding: 1em;
+		max-width: 60ch;
+	}
+
+	:global(.more-space-above) {
+		padding-top: 2em;
+	}
 
 	:global(.font-silkscreen) {
 		font-family: var(--font-silkscreen);
