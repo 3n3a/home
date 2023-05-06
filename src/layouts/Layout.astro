@@ -15,6 +15,10 @@ const { title } = Astro.props as Props;
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width" />
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	<link rel="preload" href="/font/silkscreen.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/font/silkscreen.woff" as="font" type="font/woff" crossorigin>
+	<link rel="preload" href="https://rsms.me/inter/inter.css" as="style">
+	<link rel="preload" href="/css/weather-icons.min.css" as="style">
 	<TouchIcons />
 	<SEO
       title={title}
@@ -31,6 +35,9 @@ const { title } = Astro.props as Props;
 		}
       }}
       />
+	<link rel="preconnect" href="/api/weather">
+	<link rel="preconnect" href="https://rsms.me/">
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	<link rel="stylesheet" href="/css/weather-icons.min.css" />
 </head>
 
@@ -52,9 +59,14 @@ const { title } = Astro.props as Props;
 
 	:root {
 		--font-silkscreen: 'Silkscreen', cursive;
+		--font-inter: 'Inter', sans-serif;
+		--font-inter-var: 'Inter var', sans-serif;
 
-		--font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+		--default-font-family: var(--font-inter);
+
+		--font-size-base: clamp(1rem, 0.34vw + 0.97rem, 1.19rem);
 		--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
+		--font-size-lg-2: clamp(1.2rem, 0.7vw + 1.2rem, 1.8rem);
 		--font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
 
 		--color-text: hsl(12, 5%, 4%);
@@ -64,8 +76,34 @@ const { title } = Astro.props as Props;
 		--card-bg: rgb(255, 233, 255);
 	}
 
+	:global(.font-style-thin)               { font-variation-settings: "wght" 100, "slnt" 0   !important; font-weight:100 !important; font-style:normal !important; }
+	:global(.font-style-thin-italic)        { font-variation-settings: "wght" 100, "slnt" 100 !important; font-weight:100 !important; font-style:oblique !important; }
+	:global(.font-style-extra-light)        { font-variation-settings: "wght" 200, "slnt" 0   !important; font-weight:100 !important; font-style:normal !important; }
+	:global(.font-style-extra-light-italic) { font-variation-settings: "wght" 200, "slnt" 100 !important; font-weight:100 !important; font-style:oblique !important; }
+	:global(.font-style-light)              { font-variation-settings: "wght" 300, "slnt" 0   !important; font-weight:300 !important; font-style:normal !important; }
+	:global(.font-style-light-italic)       { font-variation-settings: "wght" 300, "slnt" 100 !important; font-weight:300 !important; font-style:oblique !important; }
+	:global(.font-style-regular)            { font-variation-settings: "wght" 400, "slnt" 0   !important; font-weight:400 !important; font-style:normal !important; }
+	:global(.font-style-italic)             { font-variation-settings: "wght" 400, "slnt" 100 !important; font-weight:400 !important; font-style:oblique !important; }
+	:global(.font-style-medium)             { font-variation-settings: "wght" 500, "slnt" 0   !important; font-weight:500 !important; font-style:normal !important; }
+	:global(.font-style-medium-italic)      { font-variation-settings: "wght" 500, "slnt" 100 !important; font-weight:500 !important; font-style:oblique !important; }
+	:global(.font-style-semi-bold)          { font-variation-settings: "wght" 600, "slnt" 0   !important; font-weight:600 !important; font-style:normal !important; }
+	:global(.font-style-semi-bold-italic)   { font-variation-settings: "wght" 600, "slnt" 100 !important; font-weight:600 !important; font-style:oblique !important; }
+	:global(.font-style-bold)               { font-variation-settings: "wght" 700, "slnt" 0   !important; font-weight:700 !important; font-style:normal !important; }
+	:global(.font-style-bold-italic)        { font-variation-settings: "wght" 700, "slnt" 100 !important; font-weight:700 !important; font-style:oblique !important; }
+	:global(.font-style-extra-bold)         { font-variation-settings: "wght" 800, "slnt" 0   !important; font-weight:800 !important; font-style:normal !important; }
+	:global(.font-style-extra-bold-italic)  { font-variation-settings: "wght" 800, "slnt" 100 !important; font-weight:800 !important; font-style:oblique !important; }
+	:global(.font-style-black)              { font-variation-settings: "wght" 900, "slnt" 0   !important; font-weight:900 !important; font-style:normal !important; }
+	:global(.font-style-black-italic)       { font-variation-settings: "wght" 900, "slnt" 100 !important; font-weight:900 !important; font-style:oblique !important; }
+
+
+	@supports (font-variation-settings: normal) {
+		:root {
+			--font-inter: var(--font-inter-var);
+		}
+	}
+
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: var(--default-font-family);
 		font-size: var(--font-size-base);
 		color: var(--color-text);
 		background-color: var(--color-bg);
@@ -81,9 +119,12 @@ const { title } = Astro.props as Props;
 		font-family: var(--font-silkscreen);
 	}
 
+	:global(.larger-font) {
+		font-size: var(--font-size-lg-2);
+	}
+
 	:global(h1) {
 		font-size: var(--font-size-xl);
-		font-family: var(--font-silkscreen);
 	}
 	
 	:global(h2) {

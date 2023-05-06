@@ -7,14 +7,19 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.pageTitle}>
-	<main class="container more-space-above">
+	<main class="container">
+		<h1 class="font-silkscreen">{frontmatter.title}</h1>
         <BackButton title="Back" href="/" />
-		<h2>{frontmatter.title}</h2>
 		
-		<slot/>
+		<div class="container more-space-above">
+			<slot/>
+		</div>
 	
-	
-    <QuoteDisplay />
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">Words of Wisdom</h2>
+			<h3>Quotes on the Art of Programming</h3>
+			<QuoteDisplay />
+		</div>
 	</main>
 	
 </Layout>
@@ -28,6 +33,6 @@ const { frontmatter } = Astro.props;
 	}
 
 	.more-space-above {
-		padding-top: 4em;
+		padding-top: 2em;
 	}
 </style>

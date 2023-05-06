@@ -19,7 +19,7 @@ const projectList: Project[] = data.data
 <Layout title="3n3a - home">
 	<main class="container">
 		<div class="spread">
-			<h1>3n3a</h1>
+			<h1 class="font-silkscreen">3n3a</h1>
 			<WeatherDisplay />
 		</div>
 		<Card
@@ -28,7 +28,7 @@ const projectList: Project[] = data.data
 				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
 				customBg="#f0f9ff"
 			/>
-		<h2 class="font-silkscreen">Projects</h2>
+		<h2 class="font-style-black larger-font">Projects</h2>
 		<div class="grid">
 			{projectList.map(function(data) {
 				return <Card title={data.title} href={data.href} body={data.body} color={data.color} customBg={data.customBg} />
@@ -45,7 +45,7 @@ const projectList: Project[] = data.data
 		padding: 1em;
 		max-width: 60ch;
 	}
-
+ 
 	h2 {
 		margin-top: 1.5em;
 	}

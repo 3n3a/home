@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "wdev": "wrangler pages dev --local -b WEATHER_API_KEY=$(grep -E '^WEATHER_API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -- npm run dev"
   },
   "devDependencies": {
     "@astrojs/prefetch": "0.2.1",

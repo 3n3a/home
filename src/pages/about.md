@@ -4,22 +4,10 @@ title: About 3n3a
 layout: ../layouts/MarkdownLayout.astro
 ---
 
-I was born in Switzerland and still live and work here. 
-At the moment I work as an apprentice at SUVA, 
-a national casualty insurance. There I develop web applications.
-In my freetime I create software that helps people. 
-Take the [**working hour calculator**](https://tc.enea.tech) I made,
- it can help people grasp how long they have to work.
+I am a software developer born and raised in Switzerland, where I also live and work. Currently, I am employed at SUVA, one of Switzerland's largest insurance companies. My role involves helping customers deal with unexpected events and ensuring they receive the necessary support.
 
-Right now I am developing this website 
-with Astro.js, and I have to say it’s 
-awesome 😎. I have also used other 
-Frameworks, such as Vue, React, Angular,
- Springboot, Express.js, Rocket, Django,
- Flask, Svelte and Phoenix.
+In my free time, I enjoy programming and have experience in various programming languages, including Elixir, Golang, NodeJS, and Python. I find coding to be a challenging and rewarding hobby, and I am always on the lookout for new projects and technologies to explore.
 
-**All of those interesting things can be found on my GitHub.**
+While I am far from being an expert in coding, I take pride in my ability to create innovative and efficient solutions to complex problems. I am passionate about programming and always eager to learn more and improve my skills.
 
-## Social Media
-
-[GitHub](https://github.com/3n3a)
+Overall, I am a dedicated and enthusiastic software developer, constantly striving to improve my knowledge and skills. Whether it's at work or in my free time, I am always excited to tackle new challenges and create meaningful solutions.
