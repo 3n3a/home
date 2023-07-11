@@ -28,11 +28,24 @@ const projectList: Project[] = data.items
 				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
 				customBg="#f0f9ff"
 			/>
-		<h2 class="font-style-black larger-font">Projects</h2>
-		<div class="grid">
-			{projectList.map(function(data) {
-				return <Card title={data.title} href={data.href} body={data.body} color={data.color} customBg={data.customBg} />
-			})}
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">Galleries</h2>
+			<p>Cool images I have taken</p>
+			<Card
+				href="/gallery/1"
+				title="View Galleries"
+				color=""
+				customBg=""
+			/>
+		</div>
+
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">Projects</h2>
+			<div class="grid">
+				{projectList.map(function(data) {
+					return <Card title={data.title} href={data.href} body={data.body} color={data.color} customBg={data.customBg} />
+				})}
+			</div>
 		</div>
 		
 	</main>

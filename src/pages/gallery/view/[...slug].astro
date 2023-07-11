@@ -1,0 +1,94 @@
+---
+import BackButton from "../../../components/BackButton.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { Gallery } from "../../../model/Gallery";
+import { Picture } from "../../../model/Picture";
+
+
+export async function getStaticPaths({ paginate }) {
+	const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
+
+	const response = await fetch(`${API_URL}/api/collections/gallery_display/records?perPage=1000`, {
+		redirect: 'follow',
+		headers: {
+			'CF-Access-Client-Id': API_CLIENT_KEY,
+			'CF-Access-Client-Secret': API_CLIENT_TOKEN,
+		}
+	})
+	const data = await response.json()
+	const galleryList: Gallery[] = data.items
+  
+  	// Return a paginated collection of paths for all posts
+  	return galleryList.map(({title, description, pictures}) => {
+		const slug = title.toLowerCase().replaceAll(' ', '_')
+		return {
+			params: { slug },
+			props: { title, description, pictures }
+		}
+	})
+}
+
+const { title, description, pictures } = Astro.props;
+---
+
+<Layout title={`3n3a - gallery - ${title}`}>
+	<main class="container">
+		<div class="spread">
+			<h1 class="font-silkscreen">3n3a</h1>
+		</div>
+
+		<BackButton title="Back" href="/gallery/1" />
+		
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">{title}</h2>
+			<p>
+				{description}
+			</p>
+			<div class="images more-space-above">
+				{pictures.map(function(data: Picture) {
+					return <div class="image-group">
+						<a href={'/api/gallery/' + data.image}>
+						<img src={'/api/gallery/' + data.thumb_medium}>
+						</a>
+						<p>{data.description}</p>
+					</div>
+				})}
+			</div>
+		</div>
+		
+	</main>
+</Layout>
+
+<style> 
+	h2 {
+		margin-top: 1.5em;
+	}
+	
+	.image-group {
+		padding: 1rem;
+		border: 1px solid black;
+		border-radius: 10px;
+	}
+
+	.images {
+		display: flex;
+		gap: 2rem;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		grid-gap: 1rem;
+		
+	}
+
+	.spread {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+</style>

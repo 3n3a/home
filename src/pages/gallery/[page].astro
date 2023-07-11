@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/Card.astro';
+
+import { Gallery } from '../../model/Gallery';
+import BackButton from '../../components/BackButton.astro';
+import ForwardButton from '../../components/ForwardButton.astro';
+
+export async function getStaticPaths({ paginate }) {
+	const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
+
+	const response = await fetch(`${API_URL}/api/collections/gallery_display/records?perPage=1000`, {
+		redirect: 'follow',
+		headers: {
+			'CF-Access-Client-Id': API_CLIENT_KEY,
+			'CF-Access-Client-Secret': API_CLIENT_TOKEN,
+		}
+	})
+	const data = await response.json()
+	const galleryList: Gallery[] = data.items
+  
+  	// Return a paginated collection of paths for all posts
+  	return paginate(galleryList, { pageSize: 20 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="3n3a - galleries">
+	<main class="container">
+		<div class="spread">
+			<h1 class="font-silkscreen">3n3a</h1>
+		</div>
+		<BackButton title="Back" href="/" />
+		
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">Galleries</h2>
+			<div class="grid">
+				{page.data.map(function(data) {
+					const slug = data.title.toLowerCase().replaceAll(' ', '_')
+					return <Card title={data.title} href={"/gallery/view/" + slug} body={data.description} color={""} customBg={""} />
+				})}
+			</div>
+		</div>
+
+		<div class="buttons">
+			<BackButton title="Prev" href={page.url.prev} disabled={page.url.prev ? false : true}></BackButton>
+			<ForwardButton title="Next" href={page.url.next} disabled={page.url.next ? false: true}></ForwardButton>
+		</div>
+		
+	</main>
+</Layout>
+
+<style> 
+	h2 {
+		margin-top: 1.5em;
+	}
+
+	.buttons{
+        display: flex;
+        gap: 1rem;
+        margin-top: 2em;
+        justify-content: space-around;
+    }
+
+
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		grid-gap: 1rem;
+		}
+
+	.spread {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+</style>
