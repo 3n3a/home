@@ -48,7 +48,7 @@ const { title, description, pictures } = Astro.props;
 				{pictures.map(function(data: Picture) {
 					return <div class="image-group">
 						<a href={'/api/gallery/' + data.image}>
-						<img src={'/api/gallery/' + data.thumb_medium}>
+						<img class="image" src={'/api/gallery/' + data.thumb_medium} alt={data.description} loading="lazy" width="720" height="480">
 						</a>
 						<p>{data.description}</p>
 					</div>
@@ -62,6 +62,14 @@ const { title, description, pictures } = Astro.props;
 <style> 
 	h2 {
 		margin-top: 1.5em;
+	}
+
+	.image {
+		max-inline-size: 100%;
+		block-size: auto;
+		object-fit: cover;
+		width: 720px;
+		height: 480px;
 	}
 	
 	.image-group {
