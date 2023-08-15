@@ -48,7 +48,23 @@ const currentYear = (new Date()).getFullYear()
 
 	<footer class="container more-space-above">
 		<p>&copy; {currentYear} 3n3a. All rights reserved. <a href="/impressum">Impressum</a></p>
-	</footer>	  
+	</footer>
+	
+	<div class="floating-area">
+		<div class="floating-inner">
+			<button class="btt-btn">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+				  </svg>				  
+			</button>
+		</div>
+	</div>
+	<script>
+		const btn = document.querySelector('.btt-btn')
+		btn.addEventListener('click', () => {
+			window.scrollTo(0,0) // to the topp
+		})
+	</script>
 </body>
 
 </html>
@@ -80,6 +96,16 @@ const currentYear = (new Date()).getFullYear()
 		
 		--card-border: rgb(253, 117, 246);
 		--card-bg: rgb(255, 233, 255);
+
+		--btt-btn-bg:  white;
+		--btt-btn-shadow: 1px 0.9px 2.2px rgba(0, 0, 0, 0.036),
+  2.3px 2.2px 5.1px rgba(0, 0, 0, 0.052),
+  4.2px 3.9px 9.1px rgba(0, 0, 0, 0.064),
+  6.9px 6.4px 15.1px rgba(0, 0, 0, 0.076),
+  11.4px 10.6px 24.9px rgba(0, 0, 0, 0.088),
+  19.9px 18.5px 43.5px rgba(0, 0, 0, 0.104),
+  43px 40px 94px rgba(0, 0, 0, 0.14)
+;
 	}
 
 	:global(.font-style-thin)               { font-variation-settings: "wght" 100, "slnt" 0   !important; font-weight:100 !important; font-style:normal !important; }
@@ -118,6 +144,42 @@ const currentYear = (new Date()).getFullYear()
 	body {
 		margin: 0;
         padding-bottom: 6rem;
+	}
+
+	.floating-area {
+		display: flex;
+		justify-content: end;
+		bottom: 0;
+		width: 100%;
+		position: sticky;
+		z-index: 9999;
+	}
+
+	.floating-inner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 5rem;
+		height: 5rem;
+	}
+
+	.btt-btn {
+		width: 3rem;
+		height: 3rem;
+		border-style: none;
+		border-radius: 100%;
+		background-color: var(--btt-btn-bg);
+		box-shadow: var(--btt-btn-shadow);
+	}
+
+	.btt-btn > svg {
+		width: 50%;
+		height: 50%;
+	}
+
+	.btt-btn:hover {
+		filter: invert();
+		cursor: pointer;
 	}
 
 	:global(main,footer) {

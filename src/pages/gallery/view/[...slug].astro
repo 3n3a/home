@@ -67,9 +67,11 @@ const { title, description, pictures } = Astro.props;
 	.image {
 		max-inline-size: 100%;
 		block-size: auto;
-		object-fit: cover;
+		object-fit: contain;
 		width: 720px;
 		height: 480px;
+		background-color: rgba(0, 0, 0, 0.163);
+		border-radius: 5px;
 	}
 	
 	.image-group {
