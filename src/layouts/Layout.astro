@@ -230,6 +230,13 @@ const currentYear = new Date().getFullYear();
 				row-gap: 1em;
 			}
 
+			:global(.h-list) {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: .3em;
+			}
+
 			@supports (font-variation-settings: normal) {
 				:root {
 					--font-inter: var(--font-inter-var);

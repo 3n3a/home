@@ -28,7 +28,8 @@ const linksList: Link[] = data.items
 			<div class="list">
 				{linksList.map(function(data) {
 					if (data.status === "active") {
-                        return <LinkCard title={data.title} href={data.url} body={data.notes} />
+						const tags_str = data.expand?.tags.map(t => t.name) || []
+                        return <LinkCard title={data.title} href={data.url} body={data.notes} tags={tags_str} />
                     }
 				})}
 			</div>

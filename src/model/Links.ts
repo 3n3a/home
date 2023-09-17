@@ -12,5 +12,5 @@ export interface Link {
     notes: string
     status: string
     url: string
-    expand: LinkTagExpand[]
+    expand: LinkTagExpand
 }

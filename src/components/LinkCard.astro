@@ -5,11 +5,12 @@ export interface Props {
 	title: string;
 	body?: string;
 	href: string;
+	tags: string[];
 	color?: string;
 	customBg?: string;
 }
 
-const { href, title, body, color, customBg } = Astro.props as Props;
+const { href, title, body, color, customBg, tags } = Astro.props as Props;
 
 const gradientColor = Color[color] || color || Color.purpleBlue;
 const displayBody = body ? "block" : "none";
@@ -25,9 +26,32 @@ const cardBg = customBg ? customBg : "var(--card-bg)";
 		</h3>
 		<div set:html={body}>
 		</div>
+		<div class="h-list more-space-above">
+			{tags.map(function(tag) {
+				return <div class="bean">{tag}</div>
+			})}
+		</div>
 	</a>
 </div>
 <style define:vars={{ gradientColor, displayBody, cardBg }}>
+
+	.bean {
+		--labelVPadding: 3px;
+		--labelHPadding: 9px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: top;
+		gap: 5px;
+		padding: var(--labelVPadding) var(--labelHPadding);
+		min-height: 24px;
+		max-width: 100%;
+		text-align: center;
+		background: lightgray;
+		color: black;
+		white-space: nowrap;
+		border-radius: 30px;
+	}
 
 	.link-card {
 		display: flex;
