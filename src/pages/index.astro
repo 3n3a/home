@@ -1,19 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import { Project } from '../model/Project';
-import WeatherDisplay from '../components/WeatherDisplay.astro';
-const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { Project } from "../model/Project";
+import WeatherDisplay from "../components/WeatherDisplay.astro";
+const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env;
 
 const response = await fetch(`${API_URL}/api/collections/projects/records`, {
-	redirect: 'follow',
+	redirect: "follow",
 	headers: {
-		'CF-Access-Client-Id': API_CLIENT_KEY,
-		'CF-Access-Client-Secret': API_CLIENT_TOKEN,
-	}
-})
-const data = await response.json()
-const projectList: Project[] = data.items
+		"CF-Access-Client-Id": API_CLIENT_KEY,
+		"CF-Access-Client-Secret": API_CLIENT_TOKEN,
+	},
+});
+const data = await response.json();
+const projectList: Project[] = data.items;
 ---
 
 <Layout title="3n3a - home">
@@ -22,46 +22,59 @@ const projectList: Project[] = data.items
 			<h1 class="font-silkscreen">3n3a</h1>
 			<WeatherDisplay />
 		</div>
-		<Card
+
+		<div class="list">
+			<Card
 				href="/about"
 				title="About Me"
 				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
 				customBg="#f0f9ff"
 			/>
-		<div class="container more-space-above">
-			<h2 class="font-style-black larger-font">Galleries</h2>
-			<p>Images captured by myself.</p>
 			<Card
 				href="/gallery/1"
 				title="View Galleries"
-				color=""
-				customBg=""
+				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
+				customBg="#f0f9ff"
+			/>
+			<Card
+				href="/links"
+				title="View Links"
+				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
+				customBg="#f0f9ff"
 			/>
 		</div>
 
 		<div class="container more-space-above">
 			<h2 class="font-style-black larger-font">Projects</h2>
 			<div class="grid">
-				{projectList.map(function(data) {
-					return <Card title={data.title} href={data.href} body={data.body} color={data.color} customBg={data.customBg} />
-				})}
+				{
+					projectList.map(function (data) {
+						return (
+							<Card
+								title={data.title}
+								href={data.href}
+								body={data.body}
+								color={data.color}
+								customBg={data.customBg}
+							/>
+						);
+					})
+				}
 			</div>
 		</div>
-		
 	</main>
 </Layout>
 
-<style> 
+<style>
 	h2 {
 		margin-top: 1.5em;
 	}
-
 
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		grid-gap: 1rem;
-		}
+	}
 
 	.spread {
 		display: flex;

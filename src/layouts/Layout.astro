@@ -1,219 +1,324 @@
 ---
-import {SEO} from 'astro-seo'
-import TouchIcons from '../components/TouchIcons.astro'
+import { SEO } from "astro-seo";
+import TouchIcons from "../components/TouchIcons.astro";
 export interface Props {
 	title: string;
 }
 
 const { title } = Astro.props as Props;
 
-const currentYear = (new Date()).getFullYear()
+const currentYear = new Date().getFullYear();
 ---
 
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link
+			rel="preload"
+			href="/font/silkscreen.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/font/silkscreen.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
+		/>
+		<link rel="preload" href="https://rsms.me/inter/inter.css" as="style" />
+		<link rel="preload" href="/css/weather-icons.min.css" as="style" />
+		<TouchIcons />
+		<SEO
+			title={title}
+			description="A portfolio of some of the things I have created or that I love especially."
+			openGraph={{
+				basic: {
+					title: "3n3a‘s Personal Homepage",
+					type: "website",
+					image: "https://3n3a.ch/branding.jpg",
+					url: "https://3n3a.ch",
+				},
+				image: {
+					alt: "3n3a - Website",
+				},
+			}}
+		/>
+		<link rel="preconnect" href="/api/weather" />
+		<link rel="preconnect" href="https://rsms.me/" />
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+		<link rel="stylesheet" href="/css/weather-icons.min.css" />
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-	<link rel="preload" href="/font/silkscreen.woff2" as="font" type="font/woff2" crossorigin>
-	<link rel="preload" href="/font/silkscreen.woff" as="font" type="font/woff" crossorigin>
-	<link rel="preload" href="https://rsms.me/inter/inter.css" as="style">
-	<link rel="preload" href="/css/weather-icons.min.css" as="style">
-	<TouchIcons />
-	<SEO
-      title={title}
-      description="A portfolio of some of the things I have created or that I love especially."
-      openGraph={{
-        basic: {
-          title: '3n3a‘s Personal Homepage',
-          type: 'website',
-          image: 'https://3n3a.ch/branding.jpg',
-          url: 'https://3n3a.ch',
-        },
-		image: {
-			alt: '3n3a - Website'
-		}
-      }}
-      />
-	<link rel="preconnect" href="/api/weather">
-	<link rel="preconnect" href="https://rsms.me/">
-	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-	<link rel="stylesheet" href="/css/weather-icons.min.css" />
-</head>
+	<body>
+		<slot />
 
-<body>
-	<slot />
+		<footer class="container more-space-above">
+			<p>
+				&copy; {currentYear} 3n3a. All rights reserved. <a
+					href="/impressum">Impressum</a
+				>
+			</p>
+		</footer>
 
-	<footer class="container more-space-above">
-		<p>&copy; {currentYear} 3n3a. All rights reserved. <a href="/impressum">Impressum</a></p>
-	</footer>
-	
-	<div class="floating-area">
-		<div class="floating-inner">
-			<button class="btt-btn">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-				  </svg>				  
-			</button>
+		<div class="floating-area">
+			<div class="floating-inner">
+				<button class="btt-btn">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="w-6 h-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+					</svg>
+				</button>
+			</div>
 		</div>
-	</div>
-	<script>
-		const btn = document.querySelector('.btt-btn')
-		btn.addEventListener('click', () => {
-			window.scrollTo(0,0) // to the topp
-		})
-	</script>
-</body>
+		<script>
+			const btn = document.querySelector(".btt-btn");
+			btn.addEventListener("click", () => {
+				window.scrollTo(0, 0); // to the topp
+			});
+		</script>
+		<style>
+			@font-face {
+				font-family: "Silkscreen";
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: url("/font/silkscreen.woff2") format("woff2"),
+					/* Super Modern Browsers */ url("/font/silkscreen.woff")
+						format("woff"),
+					/* Pretty Modern Browsers */ url("/font/silkscreen.ttf")
+						format("truetype");
+			}
 
+			:root {
+				--font-silkscreen: "Silkscreen", cursive;
+				--font-inter: "Inter", sans-serif;
+				--font-inter-var: "Inter var", sans-serif;
+
+				--default-font-family: var(--font-inter);
+
+				--font-size-base: clamp(1rem, 0.34vw + 0.97rem, 1.19rem);
+				--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
+				--font-size-lg-2: clamp(1.2rem, 0.7vw + 1.2rem, 1.8rem);
+				--font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+
+				--color-text: hsl(12, 5%, 4%);
+				--color-bg: rgb(253, 236, 255);
+
+				--card-border: rgb(253, 117, 246);
+				--card-bg: rgb(255, 233, 255);
+
+				--btt-btn-bg: white;
+				--btt-btn-shadow: 1px 0.9px 2.2px rgba(0, 0, 0, 0.036),
+					2.3px 2.2px 5.1px rgba(0, 0, 0, 0.052),
+					4.2px 3.9px 9.1px rgba(0, 0, 0, 0.064),
+					6.9px 6.4px 15.1px rgba(0, 0, 0, 0.076),
+					11.4px 10.6px 24.9px rgba(0, 0, 0, 0.088),
+					19.9px 18.5px 43.5px rgba(0, 0, 0, 0.104),
+					43px 40px 94px rgba(0, 0, 0, 0.14);
+			}
+
+			:global(.font-style-thin) {
+				font-variation-settings: "wght" 100, "slnt" 0 !important;
+				font-weight: 100 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-thin-italic) {
+				font-variation-settings: "wght" 100, "slnt" 100 !important;
+				font-weight: 100 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-extra-light) {
+				font-variation-settings: "wght" 200, "slnt" 0 !important;
+				font-weight: 100 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-extra-light-italic) {
+				font-variation-settings: "wght" 200, "slnt" 100 !important;
+				font-weight: 100 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-light) {
+				font-variation-settings: "wght" 300, "slnt" 0 !important;
+				font-weight: 300 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-light-italic) {
+				font-variation-settings: "wght" 300, "slnt" 100 !important;
+				font-weight: 300 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-regular) {
+				font-variation-settings: "wght" 400, "slnt" 0 !important;
+				font-weight: 400 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-italic) {
+				font-variation-settings: "wght" 400, "slnt" 100 !important;
+				font-weight: 400 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-medium) {
+				font-variation-settings: "wght" 500, "slnt" 0 !important;
+				font-weight: 500 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-medium-italic) {
+				font-variation-settings: "wght" 500, "slnt" 100 !important;
+				font-weight: 500 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-semi-bold) {
+				font-variation-settings: "wght" 600, "slnt" 0 !important;
+				font-weight: 600 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-semi-bold-italic) {
+				font-variation-settings: "wght" 600, "slnt" 100 !important;
+				font-weight: 600 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-bold) {
+				font-variation-settings: "wght" 700, "slnt" 0 !important;
+				font-weight: 700 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-bold-italic) {
+				font-variation-settings: "wght" 700, "slnt" 100 !important;
+				font-weight: 700 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-extra-bold) {
+				font-variation-settings: "wght" 800, "slnt" 0 !important;
+				font-weight: 800 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-extra-bold-italic) {
+				font-variation-settings: "wght" 800, "slnt" 100 !important;
+				font-weight: 800 !important;
+				font-style: oblique !important;
+			}
+			:global(.font-style-black) {
+				font-variation-settings: "wght" 900, "slnt" 0 !important;
+				font-weight: 900 !important;
+				font-style: normal !important;
+			}
+			:global(.font-style-black-italic) {
+				font-variation-settings: "wght" 900, "slnt" 100 !important;
+				font-weight: 900 !important;
+				font-style: oblique !important;
+			}
+
+			:global(.list) {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: stretch;
+				row-gap: 1em;
+			}
+
+			@supports (font-variation-settings: normal) {
+				:root {
+					--font-inter: var(--font-inter-var);
+				}
+			}
+
+			html {
+				font-family: var(--default-font-family);
+				font-size: var(--font-size-base);
+				color: var(--color-text);
+				background-color: var(--color-bg);
+			}
+
+			body {
+				margin: 0;
+				padding-bottom: 6rem;
+			}
+
+			.floating-area {
+				display: flex;
+				justify-content: end;
+				bottom: 0;
+				width: 100%;
+				position: sticky;
+				z-index: 9999;
+			}
+
+			.floating-inner {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 5rem;
+				height: 5rem;
+			}
+
+			.btt-btn {
+				width: 3rem;
+				height: 3rem;
+				border-style: none;
+				border-radius: 100%;
+				background-color: var(--btt-btn-bg);
+				box-shadow: var(--btt-btn-shadow);
+			}
+
+			.btt-btn > svg {
+				width: 50%;
+				height: 50%;
+			}
+
+			.btt-btn:hover {
+				filter: invert();
+				cursor: pointer;
+			}
+
+			:global(main, footer) {
+				margin: auto;
+				padding: 1em;
+				max-width: 60ch;
+			}
+
+			:global(.more-space-above) {
+				padding-top: .5em;
+			}
+
+			:global(.font-silkscreen) {
+				font-family: var(--font-silkscreen);
+			}
+
+			:global(.larger-font) {
+				font-size: var(--font-size-lg-2);
+			}
+
+			:global(h1) {
+				font-size: var(--font-size-xl);
+			}
+
+			:global(h2) {
+				font-size: var(--font-size-lg);
+			}
+
+			:global(h3) {
+				font-size: var(--font-size-base);
+			}
+
+			:global(code) {
+				font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+					DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+					monospace;
+			}
+		</style>
+	</body>
 </html>
-<style>
-	@font-face {
-		font-family: 'Silkscreen';
-		font-style: normal;
-		font-weight: 400;
-		font-display: swap;
-		src: url('/font/silkscreen.woff2') format('woff2'), /* Super Modern Browsers */
-			url('/font/silkscreen.woff') format('woff'), /* Pretty Modern Browsers */
-			url('/font/silkscreen.ttf')  format('truetype');
-	}
-
-	:root {
-		--font-silkscreen: 'Silkscreen', cursive;
-		--font-inter: 'Inter', sans-serif;
-		--font-inter-var: 'Inter var', sans-serif;
-
-		--default-font-family: var(--font-inter);
-
-		--font-size-base: clamp(1rem, 0.34vw + 0.97rem, 1.19rem);
-		--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
-		--font-size-lg-2: clamp(1.2rem, 0.7vw + 1.2rem, 1.8rem);
-		--font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
-
-		--color-text: hsl(12, 5%, 4%);
-		--color-bg: rgb(253, 236, 255);
-		
-		--card-border: rgb(253, 117, 246);
-		--card-bg: rgb(255, 233, 255);
-
-		--btt-btn-bg:  white;
-		--btt-btn-shadow: 1px 0.9px 2.2px rgba(0, 0, 0, 0.036),
-  2.3px 2.2px 5.1px rgba(0, 0, 0, 0.052),
-  4.2px 3.9px 9.1px rgba(0, 0, 0, 0.064),
-  6.9px 6.4px 15.1px rgba(0, 0, 0, 0.076),
-  11.4px 10.6px 24.9px rgba(0, 0, 0, 0.088),
-  19.9px 18.5px 43.5px rgba(0, 0, 0, 0.104),
-  43px 40px 94px rgba(0, 0, 0, 0.14)
-;
-	}
-
-	:global(.font-style-thin)               { font-variation-settings: "wght" 100, "slnt" 0   !important; font-weight:100 !important; font-style:normal !important; }
-	:global(.font-style-thin-italic)        { font-variation-settings: "wght" 100, "slnt" 100 !important; font-weight:100 !important; font-style:oblique !important; }
-	:global(.font-style-extra-light)        { font-variation-settings: "wght" 200, "slnt" 0   !important; font-weight:100 !important; font-style:normal !important; }
-	:global(.font-style-extra-light-italic) { font-variation-settings: "wght" 200, "slnt" 100 !important; font-weight:100 !important; font-style:oblique !important; }
-	:global(.font-style-light)              { font-variation-settings: "wght" 300, "slnt" 0   !important; font-weight:300 !important; font-style:normal !important; }
-	:global(.font-style-light-italic)       { font-variation-settings: "wght" 300, "slnt" 100 !important; font-weight:300 !important; font-style:oblique !important; }
-	:global(.font-style-regular)            { font-variation-settings: "wght" 400, "slnt" 0   !important; font-weight:400 !important; font-style:normal !important; }
-	:global(.font-style-italic)             { font-variation-settings: "wght" 400, "slnt" 100 !important; font-weight:400 !important; font-style:oblique !important; }
-	:global(.font-style-medium)             { font-variation-settings: "wght" 500, "slnt" 0   !important; font-weight:500 !important; font-style:normal !important; }
-	:global(.font-style-medium-italic)      { font-variation-settings: "wght" 500, "slnt" 100 !important; font-weight:500 !important; font-style:oblique !important; }
-	:global(.font-style-semi-bold)          { font-variation-settings: "wght" 600, "slnt" 0   !important; font-weight:600 !important; font-style:normal !important; }
-	:global(.font-style-semi-bold-italic)   { font-variation-settings: "wght" 600, "slnt" 100 !important; font-weight:600 !important; font-style:oblique !important; }
-	:global(.font-style-bold)               { font-variation-settings: "wght" 700, "slnt" 0   !important; font-weight:700 !important; font-style:normal !important; }
-	:global(.font-style-bold-italic)        { font-variation-settings: "wght" 700, "slnt" 100 !important; font-weight:700 !important; font-style:oblique !important; }
-	:global(.font-style-extra-bold)         { font-variation-settings: "wght" 800, "slnt" 0   !important; font-weight:800 !important; font-style:normal !important; }
-	:global(.font-style-extra-bold-italic)  { font-variation-settings: "wght" 800, "slnt" 100 !important; font-weight:800 !important; font-style:oblique !important; }
-	:global(.font-style-black)              { font-variation-settings: "wght" 900, "slnt" 0   !important; font-weight:900 !important; font-style:normal !important; }
-	:global(.font-style-black-italic)       { font-variation-settings: "wght" 900, "slnt" 100 !important; font-weight:900 !important; font-style:oblique !important; }
-
-
-	@supports (font-variation-settings: normal) {
-		:root {
-			--font-inter: var(--font-inter-var);
-		}
-	}
-
-	html {
-		font-family: var(--default-font-family);
-		font-size: var(--font-size-base);
-		color: var(--color-text);
-		background-color: var(--color-bg);
-	}
-
-	body {
-		margin: 0;
-        padding-bottom: 6rem;
-	}
-
-	.floating-area {
-		display: flex;
-		justify-content: end;
-		bottom: 0;
-		width: 100%;
-		position: sticky;
-		z-index: 9999;
-	}
-
-	.floating-inner {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 5rem;
-		height: 5rem;
-	}
-
-	.btt-btn {
-		width: 3rem;
-		height: 3rem;
-		border-style: none;
-		border-radius: 100%;
-		background-color: var(--btt-btn-bg);
-		box-shadow: var(--btt-btn-shadow);
-	}
-
-	.btt-btn > svg {
-		width: 50%;
-		height: 50%;
-	}
-
-	.btt-btn:hover {
-		filter: invert();
-		cursor: pointer;
-	}
-
-	:global(main,footer) {
-		margin: auto;
-		padding: 1em;
-		max-width: 60ch;
-	}
-
-	:global(.more-space-above) {
-		padding-top: 2em;
-	}
-
-	:global(.font-silkscreen) {
-		font-family: var(--font-silkscreen);
-	}
-
-	:global(.larger-font) {
-		font-size: var(--font-size-lg-2);
-	}
-
-	:global(h1) {
-		font-size: var(--font-size-xl);
-	}
-	
-	:global(h2) {
-		font-size: var(--font-size-lg);
-	}
-
-	:global(h3) {
-		font-size: var(--font-size-base);
-	}
-
-	:global(code) {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>

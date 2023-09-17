@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Link } from '../model/Links';
+import LinkCard from '../components/LinkCard.astro';
+import BackButton from '../components/BackButton.astro';
+const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
+
+const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name`, {
+	redirect: 'follow',
+	headers: {
+		'CF-Access-Client-Id': API_CLIENT_KEY,
+		'CF-Access-Client-Secret': API_CLIENT_TOKEN,
+	}
+})
+const data = await response.json()
+const linksList: Link[] = data.items
+---
+
+<Layout title="3n3a - links">
+	<main class="container">
+		<div class="spread">
+			<h1 class="font-silkscreen">3n3a</h1>
+		</div>
+		<BackButton title="Back" href="/" />
+		
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">Links</h2>
+			<div class="list">
+				{linksList.map(function(data) {
+					if (data.status === "active") {
+                        return <LinkCard title={data.title} href={data.url} body={data.notes} />
+                    }
+				})}
+			</div>
+		</div>		
+	</main>
+</Layout>
+
+<style> 
+	h2 {
+		margin-top: 1.5em;
+	}
+
+	.buttons{
+        display: flex;
+        gap: 1rem;
+        margin-top: 2em;
+        justify-content: space-around;
+    }
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		grid-gap: 1rem;
+		}
+
+	.spread {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+</style>
