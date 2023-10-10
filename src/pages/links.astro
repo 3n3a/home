@@ -5,7 +5,7 @@ import LinkCard from '../components/LinkCard.astro';
 import BackButton from '../components/BackButton.astro';
 const { API_URL, API_CLIENT_KEY, API_CLIENT_TOKEN } = import.meta.env
 
-const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name`, {
+const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000`, {
 	redirect: 'follow',
 	headers: {
 		'CF-Access-Client-Id': API_CLIENT_KEY,
