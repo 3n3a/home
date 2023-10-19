@@ -35,6 +35,12 @@ const cardBg = customBg ? customBg : "var(--card-bg)";
 </div>
 <style define:vars={{ gradientColor, displayBody, cardBg }}>
 
+ h3 {
+		overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+	}
+
 	.bean {
 		--labelVPadding: 3px;
 		--labelHPadding: 9px;
