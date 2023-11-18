@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "wdev": "npx wrangler pages dev --local -b WEATHER_API_KEY=$(grep -E '^WEATHER_API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_URL=$(grep -E '^API_URL=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_CLIENT_KEY=$(grep -E '^API_CLIENT_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_CLIENT_TOKEN=$(grep -E '^API_CLIENT_TOKEN=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -- npm run dev"
+    "wdev": "npx wrangler pages dev --local -b WEATHER_API_KEY=$(grep -E '^WEATHER_API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_URL=$(grep -E '^API_URL=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_KEY=$(grep -E '^API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -- npm run dev"
   },
   "devDependencies": {
     "@astrojs/prefetch": "^0.4.0",
