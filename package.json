@@ -1,6 +1,6 @@
 {
   "name": "@3n3a/home",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "wdev": "npx wrangler pages dev --local -b WEATHER_API_KEY=$(grep -E '^WEATHER_API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_URL=$(grep -E '^API_URL=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_KEY=$(grep -E '^API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -- npm run dev"
+    "prewdev": "npm run build",
+    "wdev": "wrangler pages dev -b WEATHER_API_KEY=$(grep -E '^WEATHER_API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_URL=$(grep -E '^API_URL=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_USERNAME=$(grep -E '^API_USERNAME=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_PASSWORD=$(grep -E '^API_PASSWORD=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/')"
   },
   "devDependencies": {
     "@astrojs/prefetch": "^0.4.0",

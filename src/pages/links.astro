@@ -3,12 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import { Link } from '../model/Links';
 import LinkCard from '../components/LinkCard.astro';
 import BackButton from '../components/BackButton.astro';
-const { API_URL, API_KEY } = import.meta.env
+import { getToken } from '../services/auth';
+const { API_URL } = import.meta.env
 
-const response = await fetch(`${API_URL}/content/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000`, {
+const token = await getToken();
+
+const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000`, {
 	redirect: 'follow',
 	headers: {
-		'apikey': API_KEY,
+		'Authorization': 'Bearer ' + token,
 	}
 })
 const data = await response.json()

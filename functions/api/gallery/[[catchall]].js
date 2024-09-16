@@ -1,16 +1,28 @@
 export async function onRequestGet({ request, env }) {
     const path_group = request.url.split('/api/gallery')
 
+    const response = await fetch(`${env["API_URL"]}/api/collections/users/auth-with-password`, {
+        method: "POST",
+        redirect: "follow",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            identity: env["API_USERNAME"],
+            password: env["API_PASSWORD"]
+        })
+    });
+    const data = await response.json();
+    const token = data["token"];
+
     if (path_group.length > 0) {
       const path = path_group[1]
       if (path.length > 0) {
-        console.log(env)
-        const reqUrl = `${env['API_URL']}/files${path}`
-        console.log(reqUrl)
+        const reqUrl = `${env['API_URL']}/api/files${path}`
         const modifiedRequest = new Request(reqUrl, {
           headers: {
             'Accept': request.headers['accept'],
-            'apikey': env['API_KEY']
+            'Authorization': "Bearer " + token
           },
           redirect: 'manual'
         })

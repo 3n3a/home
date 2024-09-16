@@ -3,15 +3,18 @@ import BackButton from "../../../components/BackButton.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { Gallery } from "../../../model/Gallery";
 import { Picture } from "../../../model/Picture";
+import { getToken } from "../../../services/auth";
 
 
 export async function getStaticPaths({ paginate }) {
-	const { API_URL, API_KEY } = import.meta.env
+	const { API_URL } = import.meta.env
 
-	const response = await fetch(`${API_URL}/content/gallery_display/records?perPage=1000`, {
+	const token = await getToken();
+
+	const response = await fetch(`${API_URL}/api/collections/gallery_display/records?perPage=1000`, {
 		redirect: 'follow',
 		headers: {
-		'apikey': API_KEY,
+		'Authorization': 'Bearer ' + token
 	}
 	})
 	const data = await response.json()

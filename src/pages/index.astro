@@ -3,12 +3,18 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import { Project } from "../model/Project";
 import WeatherDisplay from "../components/WeatherDisplay.astro";
-const { API_URL, API_KEY } = import.meta.env;
+import { getToken } from "../services/auth";
 
-const response = await fetch(`${API_URL}/content/projects/records`, {
+const { API_URL } = import.meta.env;
+
+console.log(API_URL)
+
+const token = await getToken();
+
+const response = await fetch(`${API_URL}/api/collections/projects/records`, {
 	redirect: "follow",
 	headers: {
-		'apikey': API_KEY,
+		'Authorization': 'Bearer ' + token,
 	}
 });
 const data = await response.json();
