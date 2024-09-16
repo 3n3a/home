@@ -6,10 +6,11 @@ import { Picture } from "../../../model/Picture";
 import { getToken } from "../../../services/auth";
 
 
+
 export async function getStaticPaths({ paginate }) {
 	const { API_URL } = import.meta.env
 
-	const token = await getToken(import.meta.env);
+	const token = await getToken();
 
 	const response = await fetch(`${API_URL}/api/collections/gallery_display/records?perPage=1000`, {
 		redirect: 'follow',

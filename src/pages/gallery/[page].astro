@@ -8,7 +8,9 @@ import ForwardButton from '../../components/ForwardButton.astro';
 import { getToken } from '../../services/auth';
 
 export async function getStaticPaths({ paginate }) {
+
 	const { API_URL } = import.meta.env
+
 
 	const token = await getToken();
 
