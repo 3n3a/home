@@ -5,29 +5,16 @@ import Card from '../../components/Card.astro';
 import { Gallery } from '../../model/Gallery';
 import BackButton from '../../components/BackButton.astro';
 import ForwardButton from '../../components/ForwardButton.astro';
-import { getToken } from '../../services/auth';
+import { getGalleries } from '../../services/content';
 
-export async function getStaticPaths({ paginate }) {
-
-	const { API_URL } = import.meta.env
-
-
-	const token = await getToken();
-
-	const response = await fetch(`${API_URL}/api/collections/gallery_display/records?perPage=1000`, {
-		redirect: 'follow',
-		headers: {
-		'Authorization': 'Bearer ' + token,
-	}
-	})
-	const data = await response.json()
-	const galleryList: Gallery[] = data.items
+export async function getStaticPaths({ paginate }) {	
+	const galleryList: Gallery[] = await getGalleries()
   
   	// Return a paginated collection of paths for all posts
   	return paginate(galleryList, { pageSize: 20 });
 }
 
-const { page } = Astro.props;
+const { page }: {page: {data: Gallery[], url: {prev: string, next: string}}} = Astro.props;
 ---
 
 <Layout title="3n3a - galleries">

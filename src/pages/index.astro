@@ -3,22 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import { Project } from "../model/Project";
 import WeatherDisplay from "../components/WeatherDisplay.astro";
-import { getToken } from "../services/auth";
+import { getProjects } from "../services/content";
 
-const { API_URL } = import.meta.env;
-
-console.log(API_URL)
-
-const token = await getToken();
-
-const response = await fetch(`${API_URL}/api/collections/projects/records`, {
-	redirect: "follow",
-	headers: {
-		'Authorization': 'Bearer ' + token,
-	}
-});
-const data = await response.json();
-const projectList: Project[] = data.items;
+const projectList: Project[] = await getProjects();
 ---
 
 <Layout title="3n3a - home">
