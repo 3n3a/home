@@ -11,8 +11,8 @@
     "wdev": "wrangler pages dev -b WEATHER_API_KEY=$(grep -E '^WEATHER_API_KEY=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_URL=$(grep -E '^API_URL=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_USERNAME=$(grep -E '^API_USERNAME=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -b API_PASSWORD=$(grep -E '^API_PASSWORD=' .env | cut -d '=' -f 2- | sed 's/^\"\\(.*\\)\"$/\\1/') -- npm run dev"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "3.2.0",
-    "astro": "4.16.3",
+    "@astrojs/sitemap": "3.2.1",
+    "astro": "4.16.4",
     "astro-seo": "0.8.4",
     "wrangler": "^3.8.0"
   }
