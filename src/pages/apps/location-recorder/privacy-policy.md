@@ -37,6 +37,6 @@ We do not share any data with third-party organizations. All data remains secure
 We may update this Privacy Policy to reflect changes in our app or for other operational, legal, or regulatory reasons. Any changes will be communicated through an update notice in the app.
 
 ## Contact Us
-If you have any questions or concerns about this privacy policy, please contact us at [support@example.com](mailto:support@example.com).
+If you have any questions or concerns about this privacy policy, please contact us at [support.location-recorder@3n3a.ch](mailto:support.location-recorder@3n3a.ch).
 
-**Effective Date:** [Today's Date]
+**Effective Date:** 16. November 2024
