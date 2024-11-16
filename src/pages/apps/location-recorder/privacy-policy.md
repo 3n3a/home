@@ -1,4 +1,8 @@
-# Privacy Policy for Location Recorder
+---
+pageTitle: "Location Recorder Privacy Policy - by 3n3a"
+title: "Privacy Policy for Location Recorder"
+layout: ../../../layouts/MarkdownLayout.astro
+---
 
 ## Introduction
 
