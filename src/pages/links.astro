@@ -8,7 +8,7 @@ const { API_URL } = import.meta.env
 
 const token = await getToken();
 
-const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000`, {
+const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000&sort=-created`, {
 	redirect: 'follow',
 	headers: {
 		'Authorization': 'Bearer ' + token,
