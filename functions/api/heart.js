@@ -4,10 +4,7 @@
  * Source: openheart.fyi
  */
 
-export async function onRequestGet({ request, env }) {
-    const emoji = ensureEmoji(await request.text());
-    if (!emoji) return new Response('not ok', { status: 500 });
-
+export async function onRequestGet({ env }) {
     const hearts = await env.HEARTS.getAll();
     return Response.json(hearts);
 }
