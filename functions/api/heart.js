@@ -7,7 +7,7 @@
 export async function onRequestGet({ env }) {
     let hearts = {};
     const heartsList = await env.HEARTS.list();
-    for (const heartElement of heartsList) {
+    for (const heartElement of heartsList.keys) {
         const count = Number(await (env.HEARTS.get(heartElement.name)) || 0);
         hearts[`${heartElement.name}`] = count;
     }
