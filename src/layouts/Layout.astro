@@ -10,7 +10,7 @@ const { title } = Astro.props as Props;
 const currentYear = new Date().getFullYear();
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -63,7 +63,19 @@ const currentYear = new Date().getFullYear();
 					href="/impressum">Impressum</a
 				>
 			</p>
+			<button onclick="window.heartThis('❤️')">❤️</button>
 		</footer>
+
+		<script>
+			// @ts-ignore
+			window.heartThis = async function(emoji) {
+				const res = await fetch("/api/heart", {
+					method: "POST",
+					body: emoji,
+				});
+				console.log(res.ok);
+			}
+		</script>
 
 		<div class="floating-area">
 			<div class="floating-inner">
@@ -96,7 +108,8 @@ const currentYear = new Date().getFullYear();
 				font-style: normal;
 				font-weight: 400;
 				font-display: swap;
-				src: url("/font/silkscreen.woff2") format("woff2"),
+				src:
+					url("/font/silkscreen.woff2") format("woff2"),
 					/* Super Modern Browsers */ url("/font/silkscreen.woff")
 						format("woff"),
 					/* Pretty Modern Browsers */ url("/font/silkscreen.ttf")
@@ -132,92 +145,128 @@ const currentYear = new Date().getFullYear();
 			}
 
 			:global(.font-style-thin) {
-				font-variation-settings: "wght" 100, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 100,
+					"slnt" 0 !important;
 				font-weight: 100 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-thin-italic) {
-				font-variation-settings: "wght" 100, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 100,
+					"slnt" 100 !important;
 				font-weight: 100 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-extra-light) {
-				font-variation-settings: "wght" 200, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 200,
+					"slnt" 0 !important;
 				font-weight: 100 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-extra-light-italic) {
-				font-variation-settings: "wght" 200, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 200,
+					"slnt" 100 !important;
 				font-weight: 100 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-light) {
-				font-variation-settings: "wght" 300, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 300,
+					"slnt" 0 !important;
 				font-weight: 300 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-light-italic) {
-				font-variation-settings: "wght" 300, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 300,
+					"slnt" 100 !important;
 				font-weight: 300 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-regular) {
-				font-variation-settings: "wght" 400, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 400,
+					"slnt" 0 !important;
 				font-weight: 400 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-italic) {
-				font-variation-settings: "wght" 400, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 400,
+					"slnt" 100 !important;
 				font-weight: 400 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-medium) {
-				font-variation-settings: "wght" 500, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 500,
+					"slnt" 0 !important;
 				font-weight: 500 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-medium-italic) {
-				font-variation-settings: "wght" 500, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 500,
+					"slnt" 100 !important;
 				font-weight: 500 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-semi-bold) {
-				font-variation-settings: "wght" 600, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 600,
+					"slnt" 0 !important;
 				font-weight: 600 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-semi-bold-italic) {
-				font-variation-settings: "wght" 600, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 600,
+					"slnt" 100 !important;
 				font-weight: 600 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-bold) {
-				font-variation-settings: "wght" 700, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 700,
+					"slnt" 0 !important;
 				font-weight: 700 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-bold-italic) {
-				font-variation-settings: "wght" 700, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 700,
+					"slnt" 100 !important;
 				font-weight: 700 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-extra-bold) {
-				font-variation-settings: "wght" 800, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 800,
+					"slnt" 0 !important;
 				font-weight: 800 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-extra-bold-italic) {
-				font-variation-settings: "wght" 800, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 800,
+					"slnt" 100 !important;
 				font-weight: 800 !important;
 				font-style: oblique !important;
 			}
 			:global(.font-style-black) {
-				font-variation-settings: "wght" 900, "slnt" 0 !important;
+				font-variation-settings:
+					"wght" 900,
+					"slnt" 0 !important;
 				font-weight: 900 !important;
 				font-style: normal !important;
 			}
 			:global(.font-style-black-italic) {
-				font-variation-settings: "wght" 900, "slnt" 100 !important;
+				font-variation-settings:
+					"wght" 900,
+					"slnt" 100 !important;
 				font-weight: 900 !important;
 				font-style: oblique !important;
 			}
@@ -234,7 +283,7 @@ const currentYear = new Date().getFullYear();
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				gap: .3em;
+				gap: 0.3em;
 			}
 
 			@supports (font-variation-settings: normal) {
@@ -298,7 +347,7 @@ const currentYear = new Date().getFullYear();
 			}
 
 			:global(.more-space-above) {
-				padding-top: .5em;
+				padding-top: 0.5em;
 			}
 
 			:global(.font-silkscreen) {
@@ -322,8 +371,14 @@ const currentYear = new Date().getFullYear();
 			}
 
 			:global(code) {
-				font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-					DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+				font-family:
+					Menlo,
+					Monaco,
+					Lucida Console,
+					Liberation Mono,
+					DejaVu Sans Mono,
+					Bitstream Vera Sans Mono,
+					Courier New,
 					monospace;
 			}
 		</style>
