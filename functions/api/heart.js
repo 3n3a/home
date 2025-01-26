@@ -3,21 +3,29 @@
  * 
  * Source: openheart.fyi
  */
-addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
-})
-async function handleRequest(request) {
-    if (request.method !== 'POST') return
-    const url = new URL(request.url)
-    const id = url.searchParams.get('id')
-    const emoji = ensureEmoji(await request.text())
-    if (!id || !emoji) return new Response('not ok', { status: 500 })
-    const key = `${id}:${emoji}`
-    // https://developers.cloudflare.com/workers/runtime-apis/kv/
-    const currentCount = Number(await (NAMESPACE.get(key)) || 0)
-    await NAMESPACE.put(key, currentCount + 1)
-    return new Response('ok')
+
+export async function onRequestGet({ request, env }) {
+    const emoji = ensureEmoji(await request.text());
+    if (!emoji) return new Response('not ok', { status: 500 });
+
+    const hearts = env.HEARTS.getAll();
+    const info = JSON.stringify(hearts);
+    
+    return new Response(info);
 }
+
+export async function onRequestPost({ request, env }) {
+    const emoji = ensureEmoji(await request.text());
+    if (!emoji) return new Response('not ok', { status: 500 });
+
+    const key = `${emoji}`;
+    // https://developers.cloudflare.com/workers/runtime-apis/kv/
+    const currentCount = Number(await (HEARTS.get(key)) || 0);
+    await env.HEARTS.put(key, currentCount + 1);
+
+    return new Response('ok');
+}
+
 function ensureEmoji(emoji) {
     const segments = Array.from(new Intl.Segmenter({ granularity: 'grapheme' }).segment(emoji.trim()))
     const parsedEmoji = segments.length > 0 ? segments[0].segment : null
