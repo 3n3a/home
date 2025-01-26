@@ -8,22 +8,20 @@ export async function onRequestGet({ request, env }) {
     const emoji = ensureEmoji(await request.text());
     if (!emoji) return new Response('not ok', { status: 500 });
 
-    const hearts = env.HEARTS.getAll();
-    const info = JSON.stringify(hearts);
-    
-    return new Response(info);
+    const hearts = await env.HEARTS.getAll();
+    return Response.json(hearts);
 }
 
 export async function onRequestPost({ request, env }) {
     const emoji = ensureEmoji(await request.text());
-    if (!emoji) return new Response('not ok', { status: 500 });
+    if (!emoji) return Response.json({status: 'not ok'}, { status: 500 });
 
     const key = `${emoji}`;
     // https://developers.cloudflare.com/workers/runtime-apis/kv/
     const currentCount = Number(await (HEARTS.get(key)) || 0);
     await env.HEARTS.put(key, currentCount + 1);
 
-    return new Response('ok');
+    return Response.json({status: 'ok'})
 }
 
 function ensureEmoji(emoji) {
