@@ -5,7 +5,12 @@
  */
 
 export async function onRequestGet({ env }) {
-    const hearts = await env.HEARTS.getAll();
+    let hearts = {};
+    const heartsList = await env.HEARTS.list();
+    for (const heartElement of heartsList) {
+        const count = Number(await (env.HEARTS.get(heartElement.name)) || 0);
+        hearts[`${heartElement.name}`] = count;
+    }
     return Response.json(hearts);
 }
 
@@ -15,7 +20,7 @@ export async function onRequestPost({ request, env }) {
 
     const key = `${emoji}`;
     // https://developers.cloudflare.com/workers/runtime-apis/kv/
-    const currentCount = Number(await (HEARTS.get(key)) || 0);
+    const currentCount = Number(await (env.HEARTS.get(key)) || 0);
     await env.HEARTS.put(key, currentCount + 1);
 
     return Response.json({status: 'ok'})
