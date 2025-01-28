@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import TouchIcons from "../components/TouchIcons.astro";
+import HeartButtons from "../components/HeartButtons.astro";
 export interface Props {
 	title: string;
 }
@@ -63,19 +64,8 @@ const currentYear = new Date().getFullYear();
 					href="/impressum">Impressum</a
 				>
 			</p>
-			<button onclick="window.heartThis('❤️')">❤️</button>
+			<HeartButtons client:load />
 		</footer>
-
-		<script>
-			// @ts-ignore
-			window.heartThis = async function(emoji) {
-				const res = await fetch("/api/heart", {
-					method: "POST",
-					body: emoji,
-				});
-				console.log(res.ok);
-			}
-		</script>
 
 		<div class="floating-area">
 			<div class="floating-inner">
