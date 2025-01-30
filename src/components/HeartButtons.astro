@@ -11,7 +11,13 @@
             method: "POST",
             body: emoji,
         });
-        // write back into emoji count
+
+        if (!res.ok) return;
+
+        const json = await res.json();
+        const newCount = json["count"];
+        const emojiEl = document.getElementById(`emoji-${emoji}`);
+        emojiEl.innerText = `${emoji} (${newCount})`;
     };
 
     const emojiContainer = document.getElementById("emoji-container");
@@ -24,7 +30,7 @@
             const count = json[emoji];
             emojiContainer.insertAdjacentHTML(
                 "beforeend",
-                `<div style="border: 1px solid darkgrey; padding: .25em; border-radius: 5px;" onclick="window.heartThis('${emoji}')">${emoji} (${count})</div>`,
+                `<div id="emoji-${emoji}" style="border: 1px solid darkgrey; padding: .25em; border-radius: 5px; cursor: pointer;" onclick="window.heartThis('${emoji}')">${emoji} (${count})</div>`,
             );
         }
     }
