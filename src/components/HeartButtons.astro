@@ -30,7 +30,7 @@
             const count = json[emoji];
             emojiContainer.insertAdjacentHTML(
                 "beforeend",
-                `<div id="emoji-${emoji}" style="border: 1px solid darkgrey; padding: .25em; border-radius: 5px; cursor: pointer;" onclick="window.heartThis('${emoji}')">${emoji} (${count})</div>`,
+                `<div id="emoji-${emoji}" class="emoji" onclick="window.heartThis('${emoji}')">${emoji} (${count})</div>`,
             );
         }
     }
@@ -38,10 +38,21 @@
     loadEmojis();
 </script>
 
-<style>
+<style is:global>
     #emoji-container {
         display: flex;
         flex-direction: row;
         gap: 1em;
+    }
+
+    .emoji {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid darkgrey;
+        padding: 0.25em;
+        border-radius: 5px;
+        cursor: pointer;
     }
 </style>
