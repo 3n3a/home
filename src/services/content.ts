@@ -61,19 +61,5 @@ export async function getLinks(options?: RecordFullListOptions): Promise<Link[]>
         sort: '-created'
     };
     const pb = getPocketbaseInstance();
-    const r = await pb.collection('links').getFullList<Link>({ ...defaultOptions, ...options });
-    console.log(JSON.stringify(r.filter(r2 => r2.id === "ehin2cjmg71ecqq"), undefined, "  "));
-    return r;
-
-    // const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000&sort=-created`, {
-    //     redirect: 'follow',
-    //     headers: {
-    //         'Authorization': 'Bearer ' + token,
-    //     }
-    // })
-    // const data = await response.json()
-
-    // if (data && data.items) return data.items;
-
-    // return [];
+    return await pb.collection('links').getFullList<Link>({ ...defaultOptions, ...options });
 }
