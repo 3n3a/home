@@ -2,9 +2,19 @@
 import { SEO } from "astro-seo";
 import TouchIcons from "../components/TouchIcons.astro";
 import HeartButtons from "../components/HeartButtons.astro";
+import { getText } from "../services/content";
 export interface Props {
 	title: string;
 }
+
+const WEBSITE_COPYRIGHT_NOTICE = await getText('WEBSITE_COPYRIGHT_NOTICE');
+const LINK_IMPRESSUM_TITLE = await getText('LINK_IMPRESSUM_TITLE');
+const SEO_DESCRIPTION = await getText('SEO_DESCRIPTION');
+const SEO_OG_TITLE = await getText('SEO_OG_TITLE');
+const SEO_OG_TYPE = await getText('SEO_OG_TYPE');
+const SEO_OG_IMAGE = await getText('SEO_OG_IMAGE');
+const SEO_OG_IMAGE_ALT = await getText('SEO_OG_IMAGE_ALT');
+const SEO_OG_URL = await getText('SEO_OG_URL');
 
 const { title } = Astro.props as Props;
 
@@ -36,16 +46,16 @@ const currentYear = new Date().getFullYear();
 		<TouchIcons />
 		<SEO
 			title={title}
-			description="A portfolio of some of the things I have created or that I love especially."
+			description={SEO_DESCRIPTION}
 			openGraph={{
 				basic: {
-					title: "3n3a‘s Personal Homepage",
-					type: "website",
-					image: "https://3n3a.ch/branding.jpg",
-					url: "https://3n3a.ch",
+					title: SEO_OG_TITLE,
+					type: SEO_OG_TYPE,
+					image: SEO_OG_IMAGE,
+					url: SEO_OG_URL,
 				},
 				image: {
-					alt: "3n3a - Website",
+					alt: SEO_OG_IMAGE_ALT,
 				},
 			}}
 		/>
@@ -60,8 +70,8 @@ const currentYear = new Date().getFullYear();
 
 		<footer class="container more-space-above">
 			<p>
-				&copy; {currentYear} 3n3a. All rights reserved. <a
-					href="/impressum">Impressum</a
+				&copy; {currentYear} {WEBSITE_COPYRIGHT_NOTICE} <a
+					href="/impressum">{LINK_IMPRESSUM_TITLE}</a
 				>
 			</p>
 			<HeartButtons />
@@ -132,6 +142,8 @@ const currentYear = new Date().getFullYear();
 					11.4px 10.6px 24.9px rgba(0, 0, 0, 0.088),
 					19.9px 18.5px 43.5px rgba(0, 0, 0, 0.104),
 					43px 40px 94px rgba(0, 0, 0, 0.14);
+
+				--small-spacer: 0.5em;
 			}
 
 			:global(.font-style-thin) {
@@ -337,7 +349,7 @@ const currentYear = new Date().getFullYear();
 			}
 
 			:global(.more-space-above) {
-				padding-top: 0.5em;
+				padding-top: var(--small-spacer);
 			}
 
 			:global(.font-silkscreen) {
@@ -370,6 +382,30 @@ const currentYear = new Date().getFullYear();
 					Bitstream Vera Sans Mono,
 					Courier New,
 					monospace;
+			}
+
+			:global(.rich-text-content) {
+				padding-top: var(--small-spacer);
+			}
+
+			:global(.rich-text-content div) {
+				overflow-wrap: break-word;
+			}
+
+			:global(.rich-text-content table) {
+				table-layout: fixed;
+				width: 100%;
+				border-collapse: collapse;
+				border-radius: 5px;
+				border: 3px solid black;
+			}
+
+			:global(.rich-text-content table td,th) {
+				padding: .25em;
+			}
+			
+			:global(.rich-text-content table td) {
+				border: 3px solid black;
 			}
 		</style>
 	</body>

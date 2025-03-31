@@ -3,7 +3,11 @@ import BackButton from "../../../components/BackButton.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { Gallery } from "../../../model/Gallery";
 import { Picture } from "../../../model/Picture";
-import { getGalleries } from "../../../services/content";
+import { getGalleries, getText } from "../../../services/content";
+
+const WEBSITE_MAIN_NAME = await getText('WEBSITE_MAIN_NAME');
+const WEBSITE_BACK_BUTTON_TITLE = await getText('WEBSITE_BACK_BUTTON_TITLE');
+const GALLERIES_VIEW_WEBSITE_TITLE = await getText('GALLERIES_VIEW_WEBSITE_TITLE');
 
 export async function getStaticPaths({ paginate }) {
 	const galleryList: Gallery[] = await getGalleries();
@@ -21,13 +25,13 @@ export async function getStaticPaths({ paginate }) {
 const { title, description, pictures } = Astro.props;
 ---
 
-<Layout title={`3n3a - gallery - ${title}`}>
+<Layout title={GALLERIES_VIEW_WEBSITE_TITLE.replaceAll('{title}', title)}>
 	<main class="container">
 		<div class="spread">
-			<h1 class="font-silkscreen">3n3a</h1>
+			<h1 class="font-silkscreen">{WEBSITE_MAIN_NAME}</h1>
 		</div>
 
-		<BackButton title="Back" href="/gallery/1" />
+		<BackButton title={WEBSITE_BACK_BUTTON_TITLE} href="/gallery/1" />
 		
 		<div class="container more-space-above">
 			<h2 class="font-style-black larger-font">{title}</h2>

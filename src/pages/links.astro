@@ -3,34 +3,28 @@ import Layout from '../layouts/Layout.astro';
 import { Link } from '../model/Links';
 import LinkCard from '../components/LinkCard.astro';
 import BackButton from '../components/BackButton.astro';
-import { getToken } from '../services/auth';
-const { API_URL } = import.meta.env
+import { getLinks, getText } from '../services/content';
 
-const token = await getToken();
-
-const response = await fetch(`${API_URL}/api/collections/links/records?expand=tags&fields=*,expand.tags.name&perPage=1000&sort=-created`, {
-	redirect: 'follow',
-	headers: {
-		'Authorization': 'Bearer ' + token,
-	}
-})
-const data = await response.json()
-const linksList: Link[] = data.items
+const linksList: Link[] = await getLinks();
+const WEBSITE_MAIN_NAME = await getText('WEBSITE_MAIN_NAME');
+const WEBSITE_BACK_BUTTON_TITLE = await getText('WEBSITE_BACK_BUTTON_TITLE');
+const LINKS_WEBSITE_TITLE = await getText('LINKS_WEBSITE_TITLE');
+const LINKS_SECTION_TITLE = await getText('LINKS_SECTION_TITLE');
 ---
 
-<Layout title="3n3a - links">
+<Layout title={LINKS_WEBSITE_TITLE}>
 	<main class="container">
 		<div class="spread">
-			<h1 class="font-silkscreen">3n3a</h1>
+			<h1 class="font-silkscreen">{WEBSITE_MAIN_NAME}</h1>
 		</div>
-		<BackButton title="Back" href="/" />
+		<BackButton title={WEBSITE_BACK_BUTTON_TITLE} href="/" />
 		
 		<div class="container more-space-above">
-			<h2 class="font-style-black larger-font">Links</h2>
+			<h2 class="font-style-black larger-font">{LINKS_SECTION_TITLE}</h2>
 			<div class="list">
 				{linksList.map(function(data) {
 					if (data.status === "active") {
-						const tags_str = data.expand?.tags.map(t => t.name) || []
+						const tags_str = data.expand?.tags?.map(t => t.name) || []
                         return <LinkCard title={data.title} href={data.url} body={data.notes} tags={tags_str} />
                     }
 				})}

@@ -1,5 +1,3 @@
-// In the Future this returns the weather for a location
-
 export async function onRequestGet({ request, env }) {
   const latitude = request.cf.latitude;
   const longitude = request.cf.longitude;

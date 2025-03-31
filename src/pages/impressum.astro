@@ -2,21 +2,23 @@
 import BackButton from '../components/BackButton.astro';
 import QuoteDisplay from '../components/QuoteDisplay.astro';
 import Layout from '../layouts/Layout.astro';
-import { getText } from '../services/content';
+import { getHtml, getText } from '../services/content';
 
 const WEBSITE_QUOTES_TITLE = await getText('WEBSITE_QUOTES_TITLE');
 const WEBSITE_BACK_BUTTON_TITLE = await getText('WEBSITE_BACK_BUTTON_TITLE');
 
-const { frontmatter } = Astro.props;
+const IMPRESSUM_WEBSITE_TITLE = await getText('IMPRESSUM_WEBSITE_TITLE');
+const IMPRESSUM_SECTION_TITLE = await getText('IMPRESSUM_SECTION_TITLE');
+const IMPRESSUM_CONTENT = await getHtml('IMPRESSUM_CONTENT');
 ---
 
-<Layout title={frontmatter.pageTitle}>
+<Layout title={IMPRESSUM_WEBSITE_TITLE}>
 	<main class="container">
-		<h1 class="font-silkscreen">{frontmatter.title}</h1>
+		<h1 class="font-silkscreen">{IMPRESSUM_SECTION_TITLE}</h1>
         <BackButton title={WEBSITE_BACK_BUTTON_TITLE} href="/" />
 		
 		<div class="container more-space-above">
-			<slot/>
+			<div class="rich-text-content" set:html={IMPRESSUM_CONTENT}></div>
 		</div>
 	
 		<div class="container more-space-above">

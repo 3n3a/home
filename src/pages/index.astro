@@ -3,50 +3,131 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import { Project } from "../model/Project";
 import WeatherDisplay from "../components/WeatherDisplay.astro";
-import { getProjects } from "../services/content";
+import { getProjectsByAuthor, getText } from "../services/content";
+import { Author } from "../model/Author";
 
-const projectList: Project[] = await getProjects();
+const projectListMe: Project[] = await getProjectsByAuthor(Author.Me);
+const projectListCollab: Project[] = await getProjectsByAuthor(Author.Collab);
+const projectListOther: Project[] = await getProjectsByAuthor(Author.Other);
+const projectsTHATshouldBEverySECRETshhhh: Project[] = await getProjectsByAuthor(Author.Hidden);
+
+const WEBSITE_MAIN_NAME = await getText('WEBSITE_MAIN_NAME');
+const LINK_ABOUT_NAME = await getText('LINK_ABOUT_NAME');
+const LINK_GALLERIES_NAME = await getText('LINK_GALLERIES_NAME');
+const LINK_LINKS_NAME = await getText('LINK_LINKS_NAME');
+const HOME_WEBSITE_TITLE = await getText('HOME_WEBSITE_TITLE');
+const HOME_MY_PROJECTS_TITLE = await getText('HOME_MY_PROJECTS_TITLE');
+const HOME_MY_PROJECTS_SUBTITLE = await getText('HOME_MY_PROJECTS_SUBTITLE');
+const HOME_COLLAB_PROJECTS_TITLE = await getText('HOME_COLLAB_PROJECTS_TITLE');
+const HOME_COLLAB_PROJECTS_SUBTITLE = await getText('HOME_COLLAB_PROJECTS_SUBTITLE');
+const HOME_OTHER_PROJECTS_TITLE = await getText('HOME_OTHER_PROJECTS_TITLE');
+const HOME_OTHER_PROJECTS_SUBTITLE = await getText('HOME_OTHER_PROJECTS_SUBTITLE');
+const HOME_HIDDEN_PROJECTS_TITLE = await getText('HOME_HIDDEN_PROJECTS_TITLE');
+const HOME_HIDDEN_PROJECTS_SUBTITLE = await getText('HOME_HIDDEN_PROJECTS_SUBTITLE');
 ---
 
-<Layout title="3n3a - home">
+<Layout title={HOME_WEBSITE_TITLE}>
 	<main class="container">
 		<div class="spread">
-			<h1 class="font-silkscreen">3n3a</h1>
+			<h1 class="font-silkscreen">{WEBSITE_MAIN_NAME}</h1>
 			<WeatherDisplay />
 		</div>
 
 		<div class="list">
 			<Card
 				href="/about"
-				title="About Me"
+				title={LINK_ABOUT_NAME}
 				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
 				customBg="#f0f9ff"
 			/>
 			<Card
 				href="/gallery/1"
-				title="View Galleries"
+				title={LINK_GALLERIES_NAME}
 				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
 				customBg="#f0f9ff"
 			/>
 			<Card
 				href="/links"
-				title="View Links"
+				title={LINK_LINKS_NAME}
 				color="linear-gradient(45deg, #8acfff 0%, #60b9e6 100%, #6c9cbd 60%)"
 				customBg="#f0f9ff"
 			/>
-			<!--Card
-				href="/contact"
-				title="Contact Me"
-				color="linear-gradient(45deg, #cf9af9 0%, #aa50f4 100%, #bd7af4 60%)"
-				customBg="#f5eaff"
-			/-->
+		</div>
+
+		<div id="my-projects-container" class="container more-space-above">
+			<h2 class="font-style-black larger-font">{HOME_MY_PROJECTS_TITLE}</h2>
+			<div class="container">
+				<p>{HOME_MY_PROJECTS_SUBTITLE}</p>
+			</div>
+			<div class="grid">
+				{
+					projectListMe.map(function (data) {
+						return (
+							<Card
+								title={data.title}
+								href={data.href}
+								body={data.body}
+								color={data.color}
+								customBg={data.customBg}
+							/>
+						);
+					})
+				}
+			</div>
 		</div>
 
 		<div class="container more-space-above">
-			<h2 class="font-style-black larger-font">Projects</h2>
+			<h2 class="font-style-black larger-font">{HOME_COLLAB_PROJECTS_TITLE}</h2>
+			<div class="container">
+				<p>{HOME_COLLAB_PROJECTS_SUBTITLE}</p>
+			</div>
 			<div class="grid">
 				{
-					projectList.map(function (data) {
+					projectListCollab.map(function (data) {
+						return (
+							<Card
+								title={data.title}
+								href={data.href}
+								body={data.body}
+								color={data.color}
+								customBg={data.customBg}
+							/>
+						);
+					})
+				}
+			</div>
+		</div>
+
+		<div class="container more-space-above">
+			<h2 class="font-style-black larger-font">{HOME_OTHER_PROJECTS_TITLE}</h2>
+			<div class="container">
+				<p>{HOME_OTHER_PROJECTS_SUBTITLE}</p>
+			</div>
+			<div class="grid">
+				{
+					projectListOther.map(function (data) {
+						return (
+							<Card
+								title={data.title}
+								href={data.href}
+								body={data.body}
+								color={data.color}
+								customBg={data.customBg}
+							/>
+						);
+					})
+				}
+			</div>
+		</div>
+
+		<div id="shhhh-these-projects-are-taking-a-nap" class="container more-space-above" hidden>
+			<h2 class="font-style-black larger-font">{HOME_HIDDEN_PROJECTS_TITLE}</h2>
+			<div class="container">
+				<p>{HOME_HIDDEN_PROJECTS_SUBTITLE}</p>
+			</div>
+			<div class="grid">
+				{
+					projectsTHATshouldBEverySECRETshhhh.map(function (data) {
 						return (
 							<Card
 								title={data.title}
@@ -81,3 +162,15 @@ const projectList: Project[] = await getProjects();
 		align-items: center;
 	}
 </style>
+
+<script>
+	const myProjectsContainer = document.getElementById('my-projects-container');
+	const sleepingProjects = document.getElementById('shhhh-these-projects-are-taking-a-nap');
+	let displayHiddenCounter = 0;
+	myProjectsContainer.addEventListener("click", () => {
+		if (displayHiddenCounter >= 3) {
+			sleepingProjects.hidden = !sleepingProjects.hidden
+		}
+		displayHiddenCounter += 1;
+	})
+</script>

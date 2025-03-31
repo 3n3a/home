@@ -5,6 +5,7 @@ interface ImportMetaEnv {
     readonly API_URL: string;
     readonly API_USERNAME: string;
     readonly API_PASSWORD: string;
+    readonly ENVIRONMENT: string;
 }
 
 interface ImportMeta {
