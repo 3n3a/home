@@ -10,5 +10,5 @@
 ## Local Development
 
 ```bash
-
+npm run wdev
 ```

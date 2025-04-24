@@ -290,6 +290,10 @@ const currentYear = new Date().getFullYear();
 				gap: 0.3em;
 			}
 
+			:global(.h-scroll) {
+				overflow-x: scroll;
+			}
+
 			@supports (font-variation-settings: normal) {
 				:root {
 					--font-inter: var(--font-inter-var);

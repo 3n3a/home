@@ -26,10 +26,12 @@ const cardBg = customBg ? customBg : "var(--card-bg)";
 		</h3>
 		<div set:html={body}>
 		</div>
-		<div class="h-list more-space-above">
-			{tags.map(function(tag) {
-				return <div class="bean">{tag}</div>
-			})}
+		<div class="h-scroll">
+			<div class="h-list more-space-above">
+				{tags.map(function(tag) {
+					return <div class="bean">{tag}</div>
+				})}
+			</div>
 		</div>
 	</a>
 </div>
@@ -88,6 +90,7 @@ const cardBg = customBg ? customBg : "var(--card-bg)";
 		display: var(--displayBody);
 		margin-top: 0.75rem;
 		margin-bottom: 0;
+		text-wrap: balance;
 	}
 
 	h3 span {
