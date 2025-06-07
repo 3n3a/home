@@ -14,7 +14,7 @@
     "@astrojs/sitemap": "3.3.0",
     "astro": "^5.0.8",
     "astro-seo": "0.8.4",
-    "pocketbase": "0.26.0",
+    "pocketbase": "0.26.1",
     "wrangler": "^4.13.0"
   },
   "dependencies": {
