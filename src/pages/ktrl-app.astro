@@ -1,0 +1,169 @@
+---
+import BackButton from '../components/BackButton.astro';
+import QuoteDisplay from '../components/QuoteDisplay.astro';
+import Layout from '../layouts/Layout.astro';
+import { getHtml, getText } from '../services/content';
+
+const WEBSITE_QUOTES_TITLE = await getText('WEBSITE_QUOTES_TITLE');
+const WEBSITE_BACK_BUTTON_TITLE = await getText('WEBSITE_BACK_BUTTON_TITLE');
+---
+
+<Layout title="KTRL App">
+	<main class="container">
+		<h1 class="font-silkscreen">KTRL App</h1>
+        <BackButton title={WEBSITE_BACK_BUTTON_TITLE} href="/" />
+		
+		<div class="container more-space-above">
+			<div class="rich-text-content">
+				<h2>Privacy Policy for KTRL App</h2>
+
+<p><strong>Last updated:</strong> 1.2.2026</p>
+
+<h2>1. Introduction</h2>
+
+<p>
+KTRL App ("the App") is a client application that allows users to connect to a KTRL-compatible API
+in order to list devices and send commands to these devices.
+</p>
+
+<p>
+The API can either be:
+</p>
+<ul>
+  <li>self-hosted by the user, or</li>
+  <li>hosted by the developer at <a href="https://ktrl-api.enea.tech">https://ktrl-api.enea.tech</a></li>
+</ul>
+
+<p>
+This Privacy Policy explains how data is processed when using the App in accordance with
+Swiss data protection law (revDSG).
+</p>
+
+<h2>2. Data Collection and Processing</h2>
+
+<h3>2.1 Personal Data</h3>
+
+<p>
+The App itself does not actively collect, track, or analyze personal data.
+</p>
+
+<p>
+Depending on how the App is used, the connected API may process the following data:
+</p>
+
+<ul>
+  <li>Authentication or account-related data (for signing in)</li>
+  <li>Device identifiers and device-related metadata</li>
+  <li>Commands sent to devices</li>
+  <li>Technical data such as IP addresses</li>
+</ul>
+
+<h3>2.2 API Logs and Database Storage</h3>
+
+<p>
+When using the hosted API at <a href="https://ktrl-api.enea.tech">https://ktrl-api.enea.tech</a>:
+</p>
+
+<ul>
+  <li>Requests may be recorded in server logs for operational and security purposes</li>
+  <li>Data required for functionality (such as accounts, devices, or commands) may be stored in a database</li>
+  <li>No active tracking, profiling, or analytics are performed</li>
+</ul>
+
+<p>
+When using a self-hosted API, all data processing and storage are fully controlled by the API operator.
+</p>
+
+<h2>3. Purpose of Data Processing</h2>
+
+<p>
+Data is processed exclusively for the following purposes:
+</p>
+
+<ul>
+  <li>Authentication and authorization</li>
+  <li>Listing and managing devices</li>
+  <li>Sending commands to devices</li>
+  <li>Ensuring system security and stability</li>
+  <li>Debugging and error handling</li>
+</ul>
+
+<h2>4. Data Sharing</h2>
+
+<p>
+No personal data is sold or shared with third parties.
+</p>
+
+<p>
+Data is transmitted only:
+</p>
+
+<ul>
+  <li>between the App and the configured API endpoint</li>
+  <li>as required to provide the App’s core functionality</li>
+</ul>
+
+<h2>5. Data Retention</h2>
+
+<p>
+Server logs are retained only for as long as necessary for operational and security purposes.
+</p>
+
+<p>
+Data stored in the API database remains available as long as the corresponding account or devices exist,
+or until deletion is requested by the user or performed by the API operator.
+</p>
+
+<p>
+For self-hosted APIs, retention policies depend entirely on the operator.
+</p>
+
+<h2>6. User Rights (Switzerland)</h2>
+
+<p>
+Under Swiss data protection law, users have the right to:
+</p>
+
+<ul>
+  <li>request information about stored personal data</li>
+  <li>request correction of inaccurate data</li>
+  <li>request deletion of their data, where applicable</li>
+</ul>
+
+<p>
+Requests regarding the hosted API can be directed to the contact information below.
+</p>
+
+<h2>7. Security</h2>
+
+<p>
+Appropriate technical and organizational measures are implemented to protect data processed by the hosted API.
+However, no system can be guaranteed to be completely secure.
+</p>
+
+<h2>8. Changes to This Privacy Policy</h2>
+
+<p>
+This Privacy Policy may be updated from time to time.
+Any changes will be reflected by updating the “Last updated” date.
+</p>
+
+<h2>9. Contact</h2>
+
+<p>
+If you have questions regarding this Privacy Policy or data processing, you may contact:
+</p>
+
+<p>
+<strong>Developer:</strong> Enea Krähenbühl <a href="https://3n3a.ch/impressum">3n3a.ch - Impressum</a><br />
+<strong>API Host:</strong> <a href="https://ktrl-api.enea.tech">https://ktrl-api.enea.tech</a>
+</p>
+			</div>
+		</div>	
+	</main>
+	
+</Layout>
+
+<style>
+
+</style>
