@@ -12,12 +12,12 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "3.3.0",
-    "astro": "^5.0.8",
+    "astro": "^6.0.0",
     "astro-seo": "0.8.4",
     "pocketbase": "0.26.0",
     "wrangler": "^4.13.0"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.2"
+    "@astrojs/mdx": "^5.0.0"
   }
 }
