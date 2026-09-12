@@ -1,6 +1,7 @@
 package http
 
 import (
+	"io/fs"
 	"fmt"
 	"net/http"
 	"html/template"
@@ -11,16 +12,21 @@ import (
 )
 
 func Serve(address string, port int) {
-	f := &assets.Assets
+	a := &assets.Assets
+	p, err := fs.Sub(a, "public")
+	if err != nil {
+		panic(err)
+	}
+
+	t := &assets.Templates
 
 	addr := fmt.Sprintf("%s:%d", address, port)
 
-	templ := template.Must(template.New("").ParseFS(f, "templates/*.tmpl"))
-
+	templ := template.Must(template.New("").ParseFS(t, "templates/*.tmpl"))
 
 	router := gin.Default()
 	router.SetHTMLTemplate(templ)
-	router.StaticFS("/public", http.FS(f))
+	router.StaticFS("/public", http.FS(p))
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
@@ -30,9 +36,10 @@ func Serve(address string, port int) {
 	})
 
 	router.GET("favicon.ico", func(c *gin.Context) {
-		file, err := f.ReadFile("public/favicon.ico")
+		file, err := a.ReadFile("favicon.ico")
 		if err != nil {
 			c.JSON(http.StatusNotFound, gin.H{"error": "favicon was not found"})
+			return;
 		}
 		c.Data(http.StatusOK, "image/x-icon", file)
 	})

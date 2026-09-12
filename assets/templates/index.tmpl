@@ -1,5 +1,33 @@
-{{ define "main" }}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="text-scale" content="scale">
 
-<h1>{{ .title }}</h1>
+	<title>{{ .title }}</title>
 
-{{end}}
+	<link rel="stylesheet" href="/public/styles/reset.css">
+	<link rel="stylesheet" href="/public/styles/home.css">
+	<link rel="stylesheet" href="/public/styles/print.css">
+
+	<link rel="icon" href="/favicon.ico">
+	<link rel="icon" href="/public/icons/favicon.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="/public/icons/apple-touch-icon.png">
+	<link rel="manifest" href="/site.webmanifest">
+
+	<link rel="canonical" href="{{ .canonical }}">
+	<link rel="alternate" type="text/markdown" href="{{ .markdown }}">
+
+	<meta name="description" content="{{ .meta_description }}">
+	<meta property="og:image" content="{{ .meta_og_image }}">
+	<meta property="og:url" content="{{ .canonical }}">
+	<meta name="theme-color" content="{{ .meta_theme_color }}">
+</head>
+<body>
+	<main>
+		<h1>{{ .title }}</h1>
+		<p>{{ .author }}</p>
+	</main>
+</body>
+</html>
