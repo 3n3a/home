@@ -1,0 +1,83 @@
+/* =============================================================================
+   print.css — paper output
+   Loaded last so it can override home.css without !important.
+   ========================================================================== */
+
+@media print {
+	@page {
+		margin: 2cm;
+	}
+
+	:root {
+		--color-bg: #fff;
+		--color-surface: #fff;
+		--color-text: #000;
+		--color-text-muted: #333;
+		--color-border: #999;
+		--color-accent: #000;
+	}
+
+	body {
+		display: block;
+		min-height: 0;
+		font-size: 11pt;
+		line-height: 1.4;
+	}
+
+	/* Interactive chrome has no meaning on paper. */
+	.site-header__tools,
+	.nav-toggle,
+	.site-nav,
+	.site-search,
+	.skip-link,
+	video,
+	audio {
+		display: none;
+	}
+
+	.site-header,
+	.site-footer {
+		border: 0;
+	}
+
+	main {
+		padding-block: 0;
+	}
+
+	/* Spell out destinations, but not for in-page or scripted links. */
+	a {
+		text-decoration: underline;
+	}
+
+	a[href^="http"]::after {
+		content: " (" attr(href) ")";
+		font-size: 9pt;
+		word-break: break-all;
+	}
+
+	abbr[title]::after {
+		content: " (" attr(title) ")";
+	}
+
+	details {
+		border: 0;
+		padding: 0;
+	}
+
+	details:not([open]) > *:not(summary) {
+		display: revert;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) {
+		break-after: avoid;
+	}
+
+	:is(p, blockquote, li, img, figure, table, pre) {
+		break-inside: avoid;
+	}
+
+	img,
+	picture {
+		max-width: 100% !important;
+	}
+}

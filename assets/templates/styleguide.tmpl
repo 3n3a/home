@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="{{ with .lang }}{{ . }}{{ else }}en{{ end }}" class="no-js">
+{{ template "head" . }}
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+{{ template "site-header" . }}
+
+{{- /* Every element the stylesheet is expected to handle, on one page.
+       Keep it in sync with home.css when adding new component styles. */}}
+<main id="main" class="wrapper flow" tabindex="-1">
+	<h1>{{ .heading }}</h1>
+	<p class="lead">{{ .intro }}</p>
+
+	<h2>Headings</h2>
+	<h3>Heading level 3</h3>
+	<h4>Heading level 4</h4>
+	<h5>Heading level 5</h5>
+	<h6>Heading level 6</h6>
+
+	<h2>Text</h2>
+	<p>A paragraph of body copy, capped at <code>--measure</code> so lines stay readable.</p>
+	<p>
+		<em>Emphasis</em>, <i>italics</i>, <b>bold</b>, <strong>strong</strong>,
+		<mark>a highlight</mark>, <s>struck out</s>, H<sub>2</sub>O, x<sup>2</sup>,
+		<small>small print</small>, and <q>a short quote</q>.
+	</p>
+	<p>Published <time datetime="2020-05-23T18:00:00Z">23 May 2020</time>.</p>
+	<p><address>Main street 67</address></p>
+	<p>See <cite>The Monster Book of Monsters</cite> for more.</p>
+	<p>Break here<br>and continue on a new line.</p>
+	<p style="max-width: 200px">
+		Llanfair<wbr>pwllgwyngyll<wbr>gogerychwyrndrobwll<wbr>llantysiliogogogoch.
+	</p>
+	<p><a href="https://example.org">A link to example.org</a>.</p>
+
+	<h2>Lists</h2>
+	<ul>
+		<li>An unordered item</li>
+		<li>Another unordered item</li>
+	</ul>
+	<ol>
+		<li>The first item</li>
+		<li>The second item</li>
+	</ol>
+	<dl>
+		<dt>A term</dt>
+		<dd>Definition of a term.</dd>
+		<dt>Another term</dt>
+		<dd>Definition of another term.</dd>
+	</dl>
+
+	<h2>Quotes &amp; code</h2>
+	<blockquote>
+		The blockquote element indicates an extended quotation.
+		<cite>HTML Living Standard</cite>
+	</blockquote>
+	<p>Inline <code>code</code> inside a sentence.</p>
+	<pre><code>go run . serve --port 7777</code></pre>
+
+	<h2>Disclosure</h2>
+	<details>
+		<summary>HTML cheat sheet</summary>
+		<p>Inline elements</p>
+		<p>Block elements</p>
+	</details>
+
+	<h2>Media</h2>
+	<figure>
+		<picture>
+			<source srcset="/public/images/sample.svg" media="(orientation: portrait)">
+			<img src="/public/images/sample.svg" alt="Sandy lagoons, Fuerteventura" width="800" height="450">
+		</picture>
+		<figcaption>Sandy lagoons, Fuerteventura.</figcaption>
+	</figure>
+
+	<h2>Table</h2>
+	<div class="scroll-x">
+		<table>
+			<caption class="muted">Response times</caption>
+			<thead>
+				<tr><th scope="col">Route</th><th scope="col">Status</th><th scope="col">p95</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>/</td><td>200</td><td>12 ms</td></tr>
+				<tr><td>/styleguide</td><td>200</td><td>14 ms</td></tr>
+			</tbody>
+		</table>
+	</div>
+
+	<h2>Article</h2>
+	<article class="post flow">
+		<header class="flow">
+			<h3>The Planet Earth</h3>
+			<p class="post__meta">
+				Posted on <time datetime="2017-10-04">4 October 2017</time> by Jane Smith
+			</p>
+		</header>
+		<p>We live on a planet that's blue and green, with so many things still unseen.</p>
+		<p><a href="https://example.com/the-planet-earth/">Continue reading&hellip;</a></p>
+		<footer><small>&copy; {{ .year }} {{ .author }}</small></footer>
+	</article>
+</main>
+
+{{ template "site-footer" . }}
+</body>
+</html>

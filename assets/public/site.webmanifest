@@ -1,0 +1,17 @@
+{
+  "name": "3n3a",
+  "short_name": "3n3a",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fdfdfc",
+  "theme_color": "#1a1a18",
+  "icons": [
+    {
+      "src": "/public/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

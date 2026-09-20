@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-	<meta name="text-scale" content="scale">
-
-	<title>{{ .title }}</title>
-
-	<link rel="stylesheet" href="/public/styles/reset.css">
-	<link rel="stylesheet" href="/public/styles/home.css">
-	<link rel="stylesheet" href="/public/styles/print.css">
-
-	<link rel="icon" href="/favicon.ico">
-	<link rel="icon" href="/public/icons/favicon.svg" type="image/svg+xml">
-	<link rel="apple-touch-icon" href="/public/icons/apple-touch-icon.png">
-	<link rel="manifest" href="/site.webmanifest">
-
-	<link rel="canonical" href="{{ .canonical }}">
-	<link rel="alternate" type="text/markdown" href="{{ .markdown }}">
-
-	<meta name="description" content="{{ .meta_description }}">
-	<meta property="og:image" content="{{ .meta_og_image }}">
-	<meta property="og:url" content="{{ .canonical }}">
-	<meta name="theme-color" content="{{ .meta_theme_color }}">
-</head>
+<html lang="{{ with .lang }}{{ . }}{{ else }}en{{ end }}" class="no-js">
+{{ template "head" . }}
 <body>
-	<main>
-		<h1>{{ .title }}</h1>
-		<p>{{ .author }}</p>
-	</main>
+<a class="skip-link" href="#main">Skip to content</a>
+
+{{ template "site-header" . }}
+
+<main id="main" class="wrapper flow" tabindex="-1">
+	<h1>{{ with .heading }}{{ . }}{{ else }}{{ .title }}{{ end }}</h1>
+
+	{{- with .intro }}
+	<p class="lead">{{ . }}</p>
+	{{- end }}
+
+	{{- /* Rich text from the CMS. Typed template.HTML in Go, so it is not escaped. */}}
+	{{- with .body }}
+	<div class="flow">{{ . }}</div>
+	{{- end }}
+
+	{{- with .articles }}
+	<h2>Latest</h2>
+	<ul class="post-list flow">
+		{{- range . }}
+		<li>
+			<article class="post flow">
+				<header class="flow">
+					<h3><a href="{{ .URL }}">{{ .Title }}</a></h3>
+					<p class="post__meta">
+						{{- with .PublishedAt }}
+						<time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>
+						{{- end }}
+						{{- with .Author }} &middot; {{ . }}{{ end }}
+					</p>
+				</header>
+				{{- with .Summary }}
+				<p>{{ . }}</p>
+				{{- end }}
+				<p><a href="{{ .URL }}">Continue reading&hellip;</a></p>
+			</article>
+		</li>
+		{{- end }}
+	</ul>
+	{{- end }}
+</main>
+
+{{ template "site-footer" . }}
 </body>
 </html>

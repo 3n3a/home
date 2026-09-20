@@ -1,0 +1,53 @@
+{{- define "head" -}}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{ .title }}{{ with .site_name }} | {{ . }}{{ end }}</title>
+
+	<link rel="stylesheet" href="/public/styles/reset.css">
+	<link rel="stylesheet" href="/public/styles/home.css">
+	<link rel="stylesheet" href="/public/styles/print.css">
+
+	<link rel="icon" href="/favicon.ico" sizes="32x32">
+	<link rel="icon" href="/public/icons/favicon.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="/public/icons/apple-touch-icon.png">
+	<link rel="manifest" href="/site.webmanifest">
+
+	{{- with .canonical }}
+	<link rel="canonical" href="{{ . }}">
+	{{- end }}
+	{{- with .markdown }}
+	<link rel="alternate" type="text/markdown" href="{{ . }}">
+	{{- end }}
+	{{- with .feed }}
+	<link rel="alternate" type="application/atom+xml" href="{{ . }}" title="{{ $.site_name }}">
+	{{- end }}
+
+	{{- with .meta_description }}
+	<meta name="description" content="{{ . }}">
+	{{- end }}
+	{{- with .author }}
+	<meta name="author" content="{{ . }}">
+	{{- end }}
+	{{- with .meta_theme_color }}
+	<meta name="theme-color" content="{{ . }}">
+	{{- end }}
+
+	<meta property="og:type" content="{{ with .og_type }}{{ . }}{{ else }}website{{ end }}">
+	<meta property="og:title" content="{{ .title }}">
+	{{- with .meta_description }}
+	<meta property="og:description" content="{{ . }}">
+	{{- end }}
+	{{- with .canonical }}
+	<meta property="og:url" content="{{ . }}">
+	{{- end }}
+	{{- with .meta_og_image }}
+	<meta property="og:image" content="{{ . }}">
+	<meta name="twitter:card" content="summary_large_image">
+	{{- end }}
+
+	<!-- Flip the no-js flag before first paint so the nav toggle never flashes. -->
+	<script>document.documentElement.classList.replace("no-js", "js");</script>
+</head>
+{{- end -}}

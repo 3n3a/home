@@ -1,0 +1,41 @@
+{{- define "site-footer" -}}
+<footer class="site-footer wrapper">
+	<small>&copy; {{ .year }} {{ .author }}</small>
+	{{- with .footer_nav }}
+	<nav aria-label="Footer">
+		<menu class="site-nav">
+			{{- range . }}
+			<li><a href="{{ .URL }}">{{ .Label }}</a></li>
+			{{- end }}
+		</menu>
+	</nav>
+	{{- end }}
+</footer>
+
+<script>
+	// Nav toggle. Only bound on narrow viewports; the nav is visible by default,
+	// so this is enhancement, never a requirement.
+	(function () {
+		var toggle = document.querySelector(".nav-toggle");
+		var tools = document.getElementById("site-tools");
+		if (!toggle || !tools) return;
+
+		var narrow = window.matchMedia("(width < 48em)");
+
+		function sync() {
+			var collapsed = narrow.matches;
+			tools.hidden = collapsed;
+			toggle.setAttribute("aria-expanded", "false");
+		}
+
+		toggle.addEventListener("click", function () {
+			var expanded = toggle.getAttribute("aria-expanded") === "true";
+			toggle.setAttribute("aria-expanded", String(!expanded));
+			tools.hidden = expanded;
+		});
+
+		narrow.addEventListener("change", sync);
+		sync();
+	})();
+</script>
+{{- end -}}

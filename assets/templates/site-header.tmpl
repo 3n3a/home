@@ -1,0 +1,43 @@
+{{- define "site-header" -}}
+<header class="site-header wrapper">
+	<a class="site-header__logo" href="/">
+		{{- with .logo }}
+		<img src="{{ . }}" alt="" width="40" height="40">
+		{{- else }}
+		<svg viewBox="0 0 64 64" width="40" height="40" aria-hidden="true" focusable="false">
+			<rect width="64" height="64" rx="12" fill="currentColor"></rect>
+			<text x="32" y="43" font-size="30" font-weight="700" text-anchor="middle">3n</text>
+		</svg>
+		{{- end }}
+		<span>{{ .site_name }}</span>
+	</a>
+
+	<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-tools">
+		<span class="visually-hidden">Menu</span>
+		<span class="nav-toggle__bar" aria-hidden="true"></span>
+		<span class="nav-toggle__bar" aria-hidden="true"></span>
+		<span class="nav-toggle__bar" aria-hidden="true"></span>
+	</button>
+
+	<div class="site-header__tools" id="site-tools">
+		<nav class="site-nav" aria-label="Main">
+			<menu>
+				{{- range .nav }}
+				<li>
+					<a href="{{ .URL }}"{{ if .Current }} aria-current="page"{{ end }}>{{ .Label }}</a>
+				</li>
+				{{- end }}
+			</menu>
+		</nav>
+
+		<search class="site-search">
+			<form action="{{ with .search_action }}{{ . }}{{ else }}/search{{ end }}" method="get" role="search">
+				<label for="site-search-input">
+					<span>Search</span>
+					<input type="search" id="site-search-input" name="q" placeholder="{{ .site_name }}">
+				</label>
+			</form>
+		</search>
+	</div>
+</header>
+{{- end -}}
